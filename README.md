@@ -1,12 +1,13 @@
-# React + Vite
+# Petlove
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Petlove is a web application designed for dog and cat owners and future owners to connect, share, and care for their pets. The project consists of a user-friendly interface with multiple pages, each serving a specific purpose.
 
-Currently, two official plugins are available:
+- Home page: serves as the entry point for users, providing an overview of the app’s features and functions.
+- News page: contains a collection of articles and updates related to animals.
+- Our friends page: contains a list of partners.
+- Profile page: displays the user’s personal information, including name, profile picture, and pet information.
+- Add pet page: allows users to create a profile for their dog or cat, including information such as name, breed, age, and health information.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The user has the ability to authorize (register, log in and log out) and search for their pet by filter.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The work was done using the Vite bundler on React, Redux for state management, React Router for routing and Tailwind CSS for styling. The Axios library is used for queries. Responsive design for different devices.

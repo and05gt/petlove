@@ -1,4 +1,12 @@
+import LogOutBtn from "./LogOutBtn.jsx";
+import UserBar from "./UserBar.jsx";
+
 const UserNav = () => {
-  return <div>UserNav</div>;
+  return (
+    <>
+      {/* <UserBar /> */}
+      <LogOutBtn />
+    </>
+  );
 };
 export default UserNav;

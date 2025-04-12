@@ -4,17 +4,13 @@ const NotFoundPage = () => {
   return (
     <div className="flex flex-col items-center justify-between gap-5 bg-orange pt-[245px] pr-[33px] pb-[245px] pl-[33px] rounded-[30px]">
       <div className="flex items-center gap-2">
-        <p className="text-white text-[120px] font-extrabold leading-30">
-          4
-        </p>
+        <p className="text-white text-[120px] font-extrabold leading-30">4</p>
         <img
           className="w-29 h-[117px] rounded-[1000px] bg-white/10"
-          src="src/assets/img/404-mob@1x.webp"
+          src="../assets/img/404-mob@1x.webp"
           alt="Not Found image"
         />
-        <p className="text-white text-[120px] font-extrabold leading-30">
-          4
-        </p>
+        <p className="text-white text-[120px] font-extrabold leading-30">4</p>
       </div>
       <p className="text-white text-base font-bold leading-5 tracking-[-0.48px]">
         Ooops! This page not found :(

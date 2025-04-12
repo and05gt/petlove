@@ -8,13 +8,13 @@ const LoginPage = () => {
     <div className="flex flex-col gap-2.5">
       <PetBlock
         mob={
-          "../src/assets/img/login-mob@1x.webp 1x, ../src/assets/img/login-mob@2x.webp 2x"
+          "../assets/img/login-mob@1x.webp 1x, ../assets/img/login-mob@2x.webp 2x"
         }
         tab={
-          "../src/assets/img/login-tab@1x.webp 1x, ../src/assets/img/login-tab@2x.webp 2x"
+          "../assets/img/login-tab@1x.webp 1x, ../assets/img/login-tab@2x.webp 2x"
         }
         desk={
-          "../src/assets/img/login-desk@1x.webp 1x, ../src/assets/img/login-desk@2x.webp 2x"
+          "../assets/img/login-desk@1x.webp 1x, ../assets/img/login-desk@2x.webp 2x"
         }
         src={"../assets/img/login-desk@1x.webp"}
       />

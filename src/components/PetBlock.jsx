@@ -8,7 +8,7 @@ const PetBlock = ({ mob, tab, desk, src }) => {
           srcSet={tab}
         />
         <source media={"(min-width: 1280px)"} srcSet={desk} />
-        <img src={src} alt="Pet image" />
+        <img className="mt-0 mr-auto mb-0 ml-auto" src={src} alt="Pet image" />
       </picture>
     </div>
   );

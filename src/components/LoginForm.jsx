@@ -10,17 +10,17 @@ const LoginForm = () => {
         <input
           type="text"
           placeholder="Email"
-          className="w-full h-[42px] border border-black/15 rounded-[30px] p-3 text-black outline-0 focus:border-orange"
+          className="w-full h-10.5 border border-black/15 rounded-[30px] p-3 text-black outline-0 focus:border-orange"
         />
       </label>
       <label className="relative w-full inline-block mb-10">
         <input
           type={isVisiblePassword ? "text" : "password"}
           placeholder="Password"
-          className="w-full h-[42px] border border-black/15 rounded-[30px] p-3 text-black outline-0 focus:border-orange"
+          className="w-full h-10.5 border border-black/15 rounded-[30px] p-3 text-black outline-0 focus:border-orange"
         />
         <button
-          className="absolute top-[12px] right-[12px] border-0 outline-0 cursor-pointer"
+          className="absolute top-3 right-3 border-0 outline-0 cursor-pointer"
           type="button"
           onClick={() => setIsVisiblePassword(!isVisiblePassword)}
         >
@@ -36,7 +36,7 @@ const LoginForm = () => {
         </button>
       </label>
       <button
-        className="block w-[295px] h-[42px] bg-orange text-[14px] text-white font-bold rounded-[30px] p-3 uppercase tracking-[-0.42px] leading-[18px] border-0 outline-0 cursor-pointer"
+        className="block w-[295px] h-10.5 bg-orange text-[14px] text-white font-bold rounded-[30px] p-3 uppercase tracking-[-0.42px] leading-[18px] border-0 outline-0 cursor-pointer"
         type="submit"
       >
         Log In

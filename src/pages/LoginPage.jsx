@@ -5,7 +5,7 @@ import LoginForm from "../components/LoginForm.jsx";
 
 const LoginPage = () => {
   return (
-    <div className="flex flex-col gap-[10px]">
+    <div className="flex flex-col gap-2.5">
       <PetBlock
         mob={
           "../../src/assets/img/login-mob@1x.webp 1x, ../../src/assets/img/login-mob@2x.webp 2x"
@@ -24,7 +24,7 @@ const LoginPage = () => {
           Welcome! Please enter your credentials to login to the platform:
         </p>
         <LoginForm />
-        <p className="text-[12px] text-black/50 leading-[14px] tracking-[-0.36px] text-center">
+        <p className="text-xs text-black/50 leading-3.5 tracking-[-0.36px] text-center">
           Don’t have an account?{" "}
           <Link
             className="text-orange font-bold underline underline-offset-auto decoration-solid decoration-auto"

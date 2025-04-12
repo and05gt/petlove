@@ -65,7 +65,7 @@ const NoticesFilters = () => {
           <Select
             styles={customSelectStyles}
             components={{ DropdownIndicator: DropdownIndicatorChevron }}
-            className="w-[144px]"
+            className="w-36"
             placeholder="By gender"
             defaultValue={selectedGender}
             onChange={setSelectedGender}
@@ -88,9 +88,9 @@ const NoticesFilters = () => {
           onChange={setSelectedLocation}
         />
       </div>
-      <div className="flex flex-wrap gap-x-[10px] gap-y-[10px]">
+      <div className="flex flex-wrap gap-x-2.5 gap-y-2.5">
         <label
-          className="h-[42px] bg-white rounded-[30px] p-3 has-checked:bg-orange has-checked:text-white"
+          className="h-10.5 bg-white rounded-[30px] p-3 has-checked:bg-orange has-checked:text-white"
           htmlFor="popular"
         >
           Popular
@@ -98,7 +98,7 @@ const NoticesFilters = () => {
         </label>
 
         <label
-          className="h-[42px] bg-white rounded-[30px] p-3 has-checked:bg-orange has-checked:text-white"
+          className="h-10.5 bg-white rounded-[30px] p-3 has-checked:bg-orange has-checked:text-white"
           htmlFor="unpopular"
         >
           Unpopular
@@ -111,7 +111,7 @@ const NoticesFilters = () => {
         </label>
 
         <label
-          className="h-[42px] bg-white rounded-[30px] p-3 has-checked:bg-orange has-checked:text-white"
+          className="h-10.5 bg-white rounded-[30px] p-3 has-checked:bg-orange has-checked:text-white"
           htmlFor="cheap"
         >
           Cheap
@@ -119,7 +119,7 @@ const NoticesFilters = () => {
         </label>
 
         <label
-          className="h-[42px] bg-white rounded-[30px] p-3 has-checked:bg-orange has-checked:text-white"
+          className="h-10.5 bg-white rounded-[30px] p-3 has-checked:bg-orange has-checked:text-white"
           htmlFor="expensive"
         >
           Expensive

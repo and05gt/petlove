@@ -5,7 +5,7 @@ const UserNav = () => {
   return (
     <>
       {/* <UserBar /> */}
-      <LogOutBtn />
+      <LogOutBtn width={"178px"} />
     </>
   );
 };

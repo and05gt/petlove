@@ -3,7 +3,7 @@ import sprite from "../assets/sprite.svg";
 const Pagination = () => {
   return (
     <div className="flex justify-center items-center gap-[11px]">
-      <div className="flex gap-[6px]">
+      <div className="flex gap-1.5">
         <button
           className="relative flex items-center justify-center w-10 h-10 border border-black/5 bg-transparent rounded-full"
           type="button"
@@ -32,15 +32,15 @@ const Pagination = () => {
           </svg>
         </button>
       </div>
-      <div className="flex gap-[10px]">
+      <div className="flex gap-2.5">
         <button
-          className="flex items-center justify-center w-10 h-10 border border-orange bg-orange rounded-full text-[14px] text-white font-bold leading-[18px]"
+          className="flex items-center justify-center w-10 h-10 border border-orange bg-orange rounded-full text-sm text-white font-bold leading-4.5"
           type="button"
         >
           1
         </button>
         <button
-          className="flex items-center justify-center w-10 h-10 border border-black/5 bg-transparent rounded-full text-[14px] text-black font-bold leading-[18px]"
+          className="flex items-center justify-center w-10 h-10 border border-black/5 bg-transparent rounded-full text-sm text-black font-bold leading-4.5"
           type="button"
         >
           2
@@ -52,7 +52,7 @@ const Pagination = () => {
           ...
         </button>
       </div>
-      <div className="flex gap-[6px]">
+      <div className="flex gap-1.5">
         <button
           className="flex items-center justify-center w-10 h-10 border border-black/20 bg-transparent rounded-full"
           type="button"

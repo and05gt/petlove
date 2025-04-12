@@ -24,10 +24,10 @@ const BurgerMenu = () => {
       </button>
 
       {isMenuOpen && (
-        <div className="absolute top-0 right-0 z-10 w-[218px] h-[100vh] bg-white flex flex-col items-center justify-between pt-[236px] pb-[40px]">
+        <div className="absolute top-0 right-0 z-10 w-54.5 h-[100vh] bg-white flex flex-col items-center justify-between pt-59 pb-10">
           <button
             type="button"
-            className="absolute top-[28px] right-[20px]"
+            className="absolute top-7 right-5"
             onClick={handleCloseMenu}
           >
             <svg width={32} height={32}>

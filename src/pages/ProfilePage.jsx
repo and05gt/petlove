@@ -3,7 +3,7 @@ import MyNotices from "../components/MyNotices.jsx";
 
 const ProfilePage = () => {
   return (
-    <div>
+    <div className="flex flex-col gap-10">
       <UserCard />
       <MyNotices />
     </div>

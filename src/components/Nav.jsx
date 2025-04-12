@@ -3,14 +3,14 @@ import { NavLink } from "react-router-dom";
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(
-    "w-[119px] h-[48px] block p-[15px] border border-solid border-black/15 rounded-[30px] text-center outline-none tracking-[-0.42px] ",
+    "w-[119px] h-12 block p-[15px] border border-solid border-black/15 rounded-[30px] text-center outline-none tracking-[-0.42px] ",
     isActive && "border-orange "
   );
 };
 
 const Nav = () => {
   return (
-    <nav className="flex flex-col gap-[10px]">
+    <nav className="flex flex-col gap-2.5">
       <NavLink to="/news" className={buildLinkClass}>
         News
       </NavLink>

@@ -5,11 +5,11 @@ import LogOutBtn from "./LogOutBtn.jsx";
 
 const UserCard = () => {
   return (
-    <div>
+    <div className="flex flex-col px-5 pt-4.5 pb-10 bg-white rounded-[30px]">
       <EditUserBtn />
       <UserBlock />
       <PetsBlock />
-      <LogOutBtn />
+      <LogOutBtn width={"114px"} />
     </div>
   );
 };

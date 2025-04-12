@@ -1,8 +1,8 @@
 const HomePage = () => {
   return (
     <>
-      <div className="rounded-[30px] bg-orange pt-[18px] pr-[20px] pb-[50px] pl-[20px] flex flex-col gap-[24px]">
-        <h1 className="text-[50px] font-bold text-white leading-[48px] tracking-[-1.5px]">
+      <div className="rounded-[30px] bg-orange pt-4.5 pr-5 pb-12.5 pl-5 flex flex-col gap-6">
+        <h1 className="text-12.5 font-bold text-white leading-12 tracking-[-1.5px]">
           Take good <span className="opacity-40">care</span> of your small pets
         </h1>
         <p className="text-white font-medium">

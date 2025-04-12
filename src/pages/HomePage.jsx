@@ -14,19 +14,19 @@ const HomePage = () => {
         <source
           media={"(max-width: 767px)"}
           srcSet={
-            "../../src/assets/img/home-mob@1x.webp 1x, ../../src/assets/img/home-mob@2x.webp 2x"
+            "../src/assets/img/home-mob@1x.webp 1x, ../src/assets/img/home-mob@2x.webp 2x"
           }
         />
         <source
           media={"(min-width: 768px) and (max-width: 1279px)"}
           srcSet={
-            "../../src/assets/img/home-tab@1x.webp 1x, ../../src/assets/img/home-tab@2x.webp 2x"
+            "../src/assets/img/home-tab@1x.webp 1x, ../src/assets/img/home-tab@2x.webp 2x"
           }
         />
         <source
           media={"(min-width: 1280px)"}
           srcSet={
-            "../../src/assets/img/home-desk@1x.webp 1x, ../../src/assets/img/home-desk@2x.webp 2x"
+            "../src/assets/img/home-desk@1x.webp 1x, ../src/assets/img/home-desk@2x.webp 2x"
           }
         />
         <img

@@ -1,8 +1,15 @@
+import homeMobImg from "../assets/img/home-mob@1x.webp";
+import homeMobImg2x from "../assets/img/home-mob@2x.webp";
+import homeTabImg from "../assets/img/home-tab@1x.webp";
+import homeTabImg2x from "../assets/img/home-tab@2x.webp";
+import homeDeskImg from "../assets/img/home-desk@1x.webp";
+import homeDeskImg2x from "../assets/img/home-desk@2x.webp";
+
 const HomePage = () => {
   return (
     <>
       <div className="rounded-[30px] bg-orange pt-4.5 pr-5 pb-12.5 pl-5 flex flex-col gap-6">
-        <h1 className="text-12.5 font-bold text-white leading-12 tracking-[-1.5px]">
+        <h1 className="text-[50px] font-bold text-white leading-12 tracking-[-1.5px]">
           Take good <span className="opacity-40">care</span> of your small pets
         </h1>
         <p className="text-white font-medium">
@@ -13,26 +20,20 @@ const HomePage = () => {
       <picture>
         <source
           media={"(max-width: 767px)"}
-          srcSet={
-            "../assets/img/home-mob@1x.webp 1x, ../assets/img/home-mob@2x.webp 2x"
-          }
+          srcSet={`${homeMobImg} 1x, ${homeMobImg2x} 2x`}
         />
         <source
           media={"(min-width: 768px) and (max-width: 1279px)"}
-          srcSet={
-            "../assets/img/home-tab@1x.webp 1x, ../assets/img/home-tab@2x.webp 2x"
-          }
+          srcSet={`${homeTabImg} 1x, ${homeTabImg2x} 2x`}
         />
         <source
           media={"(min-width: 1280px)"}
-          srcSet={
-            "../assets/img/home-desk@1x.webp 1x, ../assets/img/home-desk@2x.webp 2x"
-          }
+          srcSet={`${homeDeskImg} 1x, ${homeDeskImg2x} 2x`}
         />
         <img
           className="rounded-[30px]"
-          src={"../assets/img/home-desk@1x.webp"}
-          alt="Dog"
+          src={homeDeskImg}
+          alt="Home Dog Image"
         />
       </picture>
     </>

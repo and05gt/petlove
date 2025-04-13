@@ -2,21 +2,21 @@ import { Link } from "react-router-dom";
 import PetBlock from "../components/PetBlock.jsx";
 import Title from "../components/Title.jsx";
 import LoginForm from "../components/LoginForm.jsx";
+import loginMobImg from "../assets/img/login-mob@1x.webp";
+import loginMobImg2x from "../assets/img/login-mob@2x.webp";
+import loginTabImg from "../assets/img/login-tab@1x.webp";
+import loginTabImg2x from "../assets/img/login-tab@2x.webp";
+import loginDeskImg from "../assets/img/login-desk@1x.webp";
+import loginDeskImg2x from "../assets/img/login-desk@2x.webp";
 
 const LoginPage = () => {
   return (
     <div className="flex flex-col gap-2.5">
       <PetBlock
-        mob={
-          "../assets/img/login-mob@1x.webp 1x, ../assets/img/login-mob@2x.webp 2x"
-        }
-        tab={
-          "../assets/img/login-tab@1x.webp 1x, ../assets/img/login-tab@2x.webp 2x"
-        }
-        desk={
-          "../assets/img/login-desk@1x.webp 1x, ../assets/img/login-desk@2x.webp 2x"
-        }
-        src={"../assets/img/login-desk@1x.webp"}
+        mob={`${loginMobImg} 1x, ${loginMobImg2x} 2x`}
+        tab={`${loginTabImg} 1x, ${loginTabImg2x} 2x`}
+        desk={`${loginDeskImg} 1x, ${loginDeskImg2x} 2x`}
+        src={loginDeskImg}
       />
       <div className="pt-15 pr-5 pb-15 pl-5 rounded-[30px] bg-white">
         <Title>Log In</Title>

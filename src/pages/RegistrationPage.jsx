@@ -2,21 +2,21 @@ import { Link } from "react-router-dom";
 import PetBlock from "../components/PetBlock.jsx";
 import Title from "../components/Title.jsx";
 import RegistrationForm from "../components/RegistrationForm.jsx";
+import registerMobImg from "../assets/img/register-mob@1x.webp";
+import registerMobImg2x from "../assets/img/register-mob@2x.webp";
+import registerTabImg from "../assets/img/register-tab@1x.webp";
+import registerTabImg2x from "../assets/img/register-tab@2x.webp";
+import registerDeskImg from "../assets/img/register-desk@1x.webp";
+import registerDeskImg2x from "../assets/img/register-desk@2x.webp";
 
 const RegistrationPage = () => {
   return (
     <div className="flex flex-col gap-2.5">
       <PetBlock
-        mob={
-          "../assets/img/register-mob@1x.webp 1x, ../assets/img/register-mob@2x.webp 2x"
-        }
-        tab={
-          "../assets/img/register-tab@1x.webp 1x, ../assets/img/register-tab@2x.webp 2x"
-        }
-        desk={
-          "../assets/img/register-desk@1x.webp 1x, ../assets/img/register-desk@2x.webp 2x"
-        }
-        src={"../assets/img/register-desk@1x.webp"}
+        mob={`${registerMobImg} 1x, ${registerMobImg2x} 2x`}
+        tab={`${registerTabImg} 1x, ${registerTabImg2x} 2x`}
+        desk={`${registerDeskImg} 1x, ${registerDeskImg2x} 2x`}
+        src={registerDeskImg}
       />
       <div className="pt-[27px] pr-5 pb-[27px] pl-5 rounded-[30px] bg-white">
         <Title>Registration</Title>

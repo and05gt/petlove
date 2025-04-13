@@ -5,7 +5,7 @@ const Logo = () => {
   return (
     <Link
       className="text-xl/5 font-bold tracking-[-0.8px] inline-flex items-center"
-      to="/"
+      to="/home"
     >
       petl
       <span className="w-[17px] h-[17px]">

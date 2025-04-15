@@ -11,7 +11,7 @@ import loginDeskImg2x from "../assets/img/login-desk@2x.webp";
 
 const LoginPage = () => {
   return (
-    <div className="flex flex-col gap-2.5">
+    <section className="flex flex-col gap-2.5">
       <PetBlock
         mob={`${loginMobImg} 1x, ${loginMobImg2x} 2x`}
         tab={`${loginTabImg} 1x, ${loginTabImg2x} 2x`}
@@ -19,7 +19,9 @@ const LoginPage = () => {
         src={loginDeskImg}
       />
       <div className="pt-15 pr-5 pb-15 pl-5 rounded-[30px] bg-white">
-        <Title>Log In</Title>
+        <Title mb={"12px"} tracking={"-1.12px"}>
+          Log In
+        </Title>
         <p className="mb-6">
           Welcome! Please enter your credentials to login to the platform:
         </p>
@@ -34,7 +36,7 @@ const LoginPage = () => {
           </Link>
         </p>
       </div>
-    </div>
+    </section>
   );
 };
 export default LoginPage;

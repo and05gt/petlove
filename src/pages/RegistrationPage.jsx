@@ -11,7 +11,7 @@ import registerDeskImg2x from "../assets/img/register-desk@2x.webp";
 
 const RegistrationPage = () => {
   return (
-    <div className="flex flex-col gap-2.5">
+    <section className="flex flex-col gap-2.5">
       <PetBlock
         mob={`${registerMobImg} 1x, ${registerMobImg2x} 2x`}
         tab={`${registerTabImg} 1x, ${registerTabImg2x} 2x`}
@@ -19,7 +19,9 @@ const RegistrationPage = () => {
         src={registerDeskImg}
       />
       <div className="pt-[27px] pr-5 pb-[27px] pl-5 rounded-[30px] bg-white">
-        <Title>Registration</Title>
+        <Title mb={"12px"} tracking={"-1.12px"}>
+          Registration
+        </Title>
         <p className="mb-5">Thank you for your interest in our platform.</p>
         <RegistrationForm />
         <p className="text-xs text-black/50 leading-3.5 tracking-[-0.36px] text-center">
@@ -32,7 +34,7 @@ const RegistrationPage = () => {
           </Link>
         </p>
       </div>
-    </div>
+    </section>
   );
 };
 export default RegistrationPage;

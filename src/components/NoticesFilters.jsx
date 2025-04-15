@@ -50,7 +50,7 @@ const NoticesFilters = () => {
   );
 
   return (
-    <form className="w-[335px] px-5 py-5 bg-brown-light rounded-[30px]">
+    <form className="w-[335px] px-5 py-5 bg-brown-light rounded-[30px] mb-10">
       <div className="flex flex-col gap-3 pb-5 mb-5 border-b-[1px] border-black/10">
         <SearchField />
         <div className="flex gap-2">

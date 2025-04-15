@@ -1,8 +1,11 @@
 import sprite from "../assets/sprite.svg";
 
-const SearchField = () => {
+const SearchField = ({ mb }) => {
   return (
-    <label className="relative w-full inline-block">
+    <label
+      style={{ marginBottom: mb }}
+      className="relative w-full inline-block"
+    >
       <input
         className="peer w-full h-10.5 border border-black/15 rounded-[30px] px-3 py-3 outline-0 text-black placeholder:text-black/50 focus:border-orange"
         type="text"

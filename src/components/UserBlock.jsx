@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import sprite from "../assets/sprite.svg";
 
 const UserBlock = () => {
@@ -10,9 +9,9 @@ const UserBlock = () => {
             <use href={sprite + "#icon-user"}></use>
           </svg>
         </div>
-        <Link className="text-xs font-medium leading-4 tracking-[-0.24px] underline decoration-solid decoration-auto underline-offset-auto">
+        <button className="text-xs font-medium leading-4 tracking-[-0.24px] underline decoration-solid decoration-auto underline-offset-auto border-0 outline-0 cursor-pointer" type="button">
           Upload photo
-        </Link>
+        </button>
       </div>
       <h3 className="text-base font-bold leading-5 mb-5">My information</h3>
       <ul className="flex flex-col gap-2.5 mb-10">

@@ -5,12 +5,14 @@ import Pagination from "../components/Pagination.jsx";
 
 const NoticesPage = () => {
   return (
-    <div>
-      <Title>Find your favorite pet</Title>
+    <section>
+      <Title mb={"40px"} tracking={"-0.84px"}>
+        Find your favorite pet
+      </Title>
       <NoticesFilters />
       <NoticesList />
       <Pagination />
-    </div>
+    </section>
   );
 };
 export default NoticesPage;

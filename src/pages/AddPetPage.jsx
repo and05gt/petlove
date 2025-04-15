@@ -9,7 +9,7 @@ import addPetDeskImg2x from "../assets/img/add-pet-desk@2x.webp";
 
 const AddPetPage = () => {
   return (
-    <div className="flex flex-col gap-2.5">
+    <section className="flex flex-col gap-2.5">
       <PetBlock
         mob={`${addPetMobImg} 1x, ${addPetMobImg2x} 2x`}
         tab={`${addPetTabImg} 1x, ${addPetTabImg2x} 2x`}
@@ -17,7 +17,7 @@ const AddPetPage = () => {
         src={addPetDeskImg}
       />
       <AddPetForm />
-    </div>
+    </section>
   );
 };
 export default AddPetPage;

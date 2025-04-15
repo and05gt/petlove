@@ -3,10 +3,12 @@ import FriendsList from "../components/FriendsList.jsx";
 
 const FriendsPage = () => {
   return (
-    <div>
-      <Title>Our friends</Title>
+    <section>
+      <Title mb={"40px"} tracking={"-0.84px"}>
+        Our friends
+      </Title>
       <FriendsList />
-    </div>
+    </section>
   );
 };
 export default FriendsPage;

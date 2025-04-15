@@ -26,9 +26,9 @@ const ModalApproveAction = ({ isOpen, onClose }) => {
             height={44}
           />
         </div>
-        <p className="text-xl font-bold leading-5 tracking-[-0.6px] mb-7">
+        <h2 className="text-xl font-bold leading-5 tracking-[-0.6px] mb-7">
           Already leaving?
-        </p>
+        </h2>
         <div className="flex items-center justify-center gap-2">
           <button
             className="w-[137px] h-10.5 bg-orange rounded-[30px] text-sm text-white font-bold leading-4.5 tracking-[-0.42px] border-0 outline-0 cursor-pointer"

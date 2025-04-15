@@ -1,4 +1,10 @@
+import FriendsItem from "./FriendsItem.jsx";
+
 const FriendsList = () => {
-  return <div>FriendsList</div>;
+  return (
+    <div>
+      <FriendsItem />
+    </div>
+  );
 };
 export default FriendsList;

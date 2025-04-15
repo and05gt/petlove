@@ -8,7 +8,7 @@ import notFoundDeskImg2x from "../assets/img/404-desk@2x.webp";
 
 const NotFoundPage = () => {
   return (
-    <div className="flex flex-col items-center justify-between gap-5 bg-orange pt-[245px] pr-[33px] pb-[245px] pl-[33px] rounded-[30px]">
+    <section className="flex flex-col items-center justify-between gap-5 bg-orange pt-[245px] pr-[33px] pb-[245px] pl-[33px] rounded-[30px]">
       <div className="flex items-center gap-2">
         <p className="text-white text-[120px] font-extrabold leading-30">4</p>
         <picture>
@@ -41,7 +41,7 @@ const NotFoundPage = () => {
       >
         To home page
       </Link>
-    </div>
+    </section>
   );
 };
 export default NotFoundPage;

@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import Header from "./Header.jsx";
-// import Loader from "./Loader.jsx";
+import Loader from "./Loader.jsx";
 import { Outlet } from "react-router-dom";
 
 const Layout = () => {
@@ -12,7 +12,7 @@ const Layout = () => {
           <Outlet />
         </main>
       </Suspense>
-      {/* <Loader /> */}
+      <Loader />
     </>
   );
 };

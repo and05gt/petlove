@@ -5,11 +5,9 @@ import mainTabImg2x from "../assets/img/main-tab@2x.webp";
 import mainDeskImg from "../assets/img/main-desk@1x.webp";
 import mainDeskImg2x from "../assets/img/main-desk@2x.webp";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const Loader = () => {
   const [progress, setProgress] = useState(0);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,11 +18,10 @@ const Loader = () => {
         }
         return prev + 1;
       });
-      navigate("/home");
     }, 10);
 
     return () => clearInterval(interval);
-  }, [navigate]);
+  }, []);
 
   return (
     <div className="fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center">

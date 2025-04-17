@@ -9,8 +9,12 @@ const setAuthHeader = (token) => {
   petloveApi.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-export const register = createAsyncThunk(
-  "auth/register",
+const clearAuthHeader = () => {
+  petloveApi.defaults.headers.common.Authorization = "";
+};
+
+export const registerUser = createAsyncThunk(
+  "auth/registerUser",
   async (credentials, thunkAPI) => {
     try {
       const { data } = await petloveApi.post("/users/signup", credentials);
@@ -38,6 +42,7 @@ export const login = createAsyncThunk(
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     await petloveApi.post("/users/signout");
+    clearAuthHeader();
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }

@@ -1,8 +1,13 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import "./App.css";
 import Layout from "./components/Layout.jsx";
 import { Route, Routes } from "react-router-dom";
 import Loader from "./components/Loader.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsRefreshing } from "./redux/auth/selectors.js";
+import { refreshUser } from "./redux/auth/operations.js";
+import PrivateRoute from "./components/PrivateRoute.jsx";
+import RestrictedRoute from "./components/RestrictedRoute.jsx";
 const HomePage = lazy(() => import("./pages/HomePage.jsx"));
 const NewsPage = lazy(() => import("./pages/NewsPage.jsx"));
 const NoticesPage = lazy(() => import("./pages/NoticesPage.jsx"));
@@ -14,18 +19,51 @@ const AddPetPage = lazy(() => import("./pages/AddPetPage.jsx"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage.jsx"));
 
 const App = () => {
-  return (
-    <Suspense fallback={<Loader />}>
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  return isRefreshing ? (
+    <Loader />
+  ) : (
+    <Suspense fallback={null}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/home" element={<HomePage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/notices" element={<NoticesPage />} />
           <Route path="/friends" element={<FriendsPage />} />
-          <Route path="/register" element={<RegistrationPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/add-pet" element={<AddPetPage />} />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                component={<RegistrationPage />}
+                redirectTo="/profile"
+              />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute
+                component={<LoginPage />}
+                redirectTo="/profile"
+              />
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute component={<ProfilePage />} redirectTo="/" />
+            }
+          />
+          <Route
+            path="/add-pet"
+            element={<PrivateRoute component={<AddPetPage />} redirectTo="/" />}
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

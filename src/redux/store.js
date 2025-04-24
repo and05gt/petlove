@@ -1,5 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authReducer } from "./auth/slice.js";
+import { usersReducer } from "./users/slice.js";
+import { newsReducer } from "./news/slice.js";
+import { friendsReducer } from "./friends/slice.js";
 import {
   persistStore,
   persistReducer,
@@ -12,7 +14,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-const persistConfig = {
+const authPersistConfig = {
   key: "root-auth",
   version: 1,
   storage,
@@ -21,7 +23,9 @@ const persistConfig = {
 
 export const store = configureStore({
   reducer: {
-    auth: persistReducer(persistConfig, authReducer),
+    users: persistReducer(authPersistConfig, usersReducer),
+    news: newsReducer,
+    friends: friendsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

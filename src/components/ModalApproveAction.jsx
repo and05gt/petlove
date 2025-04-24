@@ -1,9 +1,22 @@
 import sprite from "../assets/sprite.svg";
 import catImg from "../assets/img/cat@1x.webp";
 import catImg2x from "../assets/img/cat@2x.webp";
+import { useDispatch } from "react-redux";
+import { logOut } from "../redux/users/operations.js";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const ModalApproveAction = ({ isOpen, onClose }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   if (!isOpen) return null;
+
+  const handleLogout = () => {
+    dispatch(logOut());
+    toast.success("Sign out success");
+    navigate("/home");
+  };
 
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black/30 flex justify-center items-center">
@@ -33,6 +46,7 @@ const ModalApproveAction = ({ isOpen, onClose }) => {
           <button
             className="w-[137px] h-10.5 bg-orange rounded-[30px] text-sm text-white font-bold leading-4.5 tracking-[-0.42px] border-0 outline-0 cursor-pointer"
             type="button"
+            onClick={handleLogout}
           >
             Yes
           </button>

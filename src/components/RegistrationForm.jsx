@@ -4,19 +4,26 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
-import { registerUser } from "../redux/auth/operations.js";
+import { registerUser } from "../redux/users/operations.js";
 import toast from "react-hot-toast";
 
-const schema = yup.object().shape({
+const registerSchema = yup.object().shape({
   name: yup.string().required("Name is required!"),
   email: yup
     .string()
-    .email("Email must be a valid!")
+    .matches(
+      /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+      "Enter a valid Email"
+    )
     .required("Email is required!"),
   password: yup
     .string()
-    .min(7, "Minimum 7 characters")
+    .min(7, "Password must be at least 7 characters")
     .required("Password is required!"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Passwords must match")
+    .required("Confirm password is required!"),
 });
 
 const RegistrationForm = () => {
@@ -30,18 +37,15 @@ const RegistrationForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
-    getValues,
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(registerSchema),
+    mode: "onSubmit",
   });
 
   const onSubmit = (data) => {
     const { confirmPassword, ...userData } = data;
-    if (data.password !== data.confirmPassword) {
-      toast.error("Passwords do not match!");
-      return;
-    }
     dispatch(registerUser(userData));
+    toast.success("Registration successful!");
     reset();
   };
 
@@ -62,9 +66,7 @@ const RegistrationForm = () => {
       </label>
       <label className="w-full inline-block mb-2.5">
         <input
-          {...register("email", {
-            pattern: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-          })}
+          {...register("email")}
           type="text"
           placeholder="Email"
           className="w-full h-10.5 border border-black/15 rounded-[30px] p-3 text-black outline-0 focus:border-orange invalid:border-red"
@@ -125,6 +127,11 @@ const RegistrationForm = () => {
             </svg>
           )}
         </button>
+        {errors.confirmPassword && (
+          <p className="text-xs text-red leading-3.5 tracking-[-0.36px] pl-3 mt-1">
+            {errors.confirmPassword?.message}
+          </p>
+        )}
       </label>
       <button
         className="block w-[295px] h-10.5 bg-orange text-sm text-white font-bold rounded-[30px] p-3 uppercase tracking-[-0.42px] leading-4.5 border-0 outline-0 cursor-pointer"

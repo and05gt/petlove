@@ -4,16 +4,20 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
-import { login } from "../redux/auth/operations.js";
+import { logIn } from "../redux/users/operations.js";
+import toast from "react-hot-toast";
 
-const schema = yup.object().shape({
+const loginSchema = yup.object().shape({
   email: yup
     .string()
-    .email("Email must be a valid!")
+    .matches(
+      /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+      "Enter a valid Email"
+    )
     .required("Email is required!"),
   password: yup
     .string()
-    .min(7, "Minimum 7 characters")
+    .min(7, "Password must be at least 7 characters")
     .required("Password is required!"),
 });
 
@@ -27,11 +31,13 @@ const LoginForm = () => {
     formState: { errors },
     reset,
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(loginSchema),
+    mode: "onSubmit",
   });
 
   const onSubmit = (data) => {
-    dispatch(login(data));
+    dispatch(logIn(data));
+    toast.success("Login successful!");
     reset();
   };
 
@@ -39,9 +45,7 @@ const LoginForm = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="w-[295px] mb-3">
       <label className="w-full inline-block mb-2.5">
         <input
-          {...register("email", {
-            pattern: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-          })}
+          {...register("email")}
           type="text"
           placeholder="Email"
           className="w-full h-10.5 border border-black/15 rounded-[30px] p-3 text-black outline-0 focus:border-orange"

@@ -11,10 +11,12 @@ const UserNav = () => {
 
   return (
     <>
-      {/* <UserBar /> */}
+      <UserBar />
       <LogOutBtn width={"178px"} onClick={openModal} />
 
-      <ModalApproveAction isOpen={isModalOpen} onClose={closeModal} />
+      {isModalOpen && (
+        <ModalApproveAction isOpen={isModalOpen} onClose={closeModal} />
+      )}
     </>
   );
 };

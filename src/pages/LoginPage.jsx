@@ -39,4 +39,5 @@ const LoginPage = () => {
     </section>
   );
 };
+
 export default LoginPage;

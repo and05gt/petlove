@@ -9,4 +9,5 @@ const ProfilePage = () => {
     </section>
   );
 };
+
 export default ProfilePage;

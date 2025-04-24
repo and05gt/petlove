@@ -20,4 +20,5 @@ const AddPetPage = () => {
     </section>
   );
 };
+
 export default AddPetPage;

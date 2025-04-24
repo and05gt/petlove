@@ -37,4 +37,5 @@ const RegistrationPage = () => {
     </section>
   );
 };
+
 export default RegistrationPage;

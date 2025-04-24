@@ -1,15 +1,35 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import sprite from "../assets/sprite.svg";
 import Nav from "../components/Nav.jsx";
 import AuthNav from "./AuthNav.jsx";
 import UserNav from "./UserNav.jsx";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../redux/users/selectors.js";
 
 const BurgerMenu = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
-  const handleCloseMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const handleCloseMenu = (e) => {
+    e.stopPropagation();
+    if (e.target !== e.currentTarget || e.code === "Escape") {
+      setIsMenuOpen(false);
+    }
   };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setIsMenuOpen]);
 
   return (
     <>
@@ -24,7 +44,11 @@ const BurgerMenu = () => {
       </button>
 
       {isMenuOpen && (
-        <div className="absolute top-0 right-0 z-10 w-54.5 h-[100vh] bg-white flex flex-col items-center justify-between pt-59 pb-10">
+        <div
+          className="absolute top-0 right-0 z-10 w-54.5 h-[100vh] bg-white flex flex-col items-center justify-between pt-59 pb-10"
+          ref={menuRef}
+          onClick={handleCloseMenu}
+        >
           <button
             type="button"
             className="absolute top-7 right-5"
@@ -36,7 +60,7 @@ const BurgerMenu = () => {
           </button>
           <Nav />
           <AuthNav />
-          <UserNav />
+          {isLoggedIn && <UserNav />}
         </div>
       )}
     </>

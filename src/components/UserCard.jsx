@@ -13,11 +13,13 @@ const UserCard = () => {
 
   return (
     <div className="flex flex-col px-5 pt-4.5 pb-10 bg-white rounded-[30px]">
-      <EditUserBtn onClick={openModal} />
-      <UserBlock />
+      <EditUserBtn openModalEdit={openModal} />
+      <UserBlock openModalEdit={openModal} />
       <PetsBlock />
       <LogOutBtn width={"114px"} />
-      <ModalEditUser isOpen={isModalOpen} onClose={closeModal} />
+      {isModalOpen && (
+        <ModalEditUser isOpen={isModalOpen} onClose={closeModal} />
+      )}
     </div>
   );
 };

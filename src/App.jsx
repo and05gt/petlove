@@ -4,8 +4,8 @@ import Layout from "./components/Layout.jsx";
 import { Route, Routes } from "react-router-dom";
 import Loader from "./components/Loader.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { selectIsRefreshing } from "./redux/auth/selectors.js";
-import { refreshUser } from "./redux/auth/operations.js";
+import { selectIsRefreshing } from "./redux/users/selectors.js";
+import { getCurrentUser } from "./redux/users/operations.js";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import RestrictedRoute from "./components/RestrictedRoute.jsx";
 const HomePage = lazy(() => import("./pages/HomePage.jsx"));
@@ -23,7 +23,7 @@ const App = () => {
   const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    dispatch(refreshUser());
+    dispatch(getCurrentUser());
   }, [dispatch]);
 
   return isRefreshing ? (

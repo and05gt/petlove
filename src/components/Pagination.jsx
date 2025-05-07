@@ -1,55 +1,42 @@
-import { useDispatch, useSelector } from "react-redux";
 import sprite from "../assets/sprite.svg";
-import { selectPage, selectTotalPages } from "../redux/news/selectors.js";
-import {
-  changePageNext,
-  changePageBack,
-  changePageFirst,
-  changePageLast,
-} from "../redux/news/slice.js";
+import useResponsive from "../hooks/useResponsive";
 
-const Pagination = ({ updateSearchParams }) => {
-  const page = useSelector(selectPage);
-  const totalPages = useSelector(selectTotalPages);
-  const dispatch = useDispatch();
+const Pagination = ({ currentPage, totalPages, setPageNumber }) => {
+  const { windowWidth } = useResponsive();
 
   const handleChangePageNext = () => {
-    dispatch(changePageNext());
-    updateSearchParams("page", page + 1);
+    setPageNumber((prev) => prev + 1);
   };
 
   const handleChangePageBack = () => {
-    dispatch(changePageBack());
-    updateSearchParams("page", page - 1);
+    setPageNumber((prev) => prev - 1);
   };
 
   const handleChangePageFirst = () => {
-    dispatch(changePageFirst());
-    updateSearchParams("page", 1);
+    setPageNumber(1);
   };
 
   const handleChangePageLast = () => {
-    dispatch(changePageLast());
-    updateSearchParams("page", page);
+    setPageNumber(totalPages);
   };
 
   return (
-    <div className="flex justify-center items-center gap-[11px]">
-      <div className="flex gap-1.5">
+    <div className="flex justify-center items-center gap-[11px] md:gap-6">
+      <div className="flex gap-1.5 md:gap-2">
         <button
           className={
-            page === 1
-              ? "relative flex items-center justify-center w-10 h-10 border border-black/5 bg-transparent rounded-full"
-              : "relative flex items-center justify-center w-10 h-10 border border-black/20 bg-transparent rounded-full"
+            currentPage === 1
+              ? "relative flex items-center justify-center w-10 h-10 border border-black/5 bg-transparent rounded-full md:w-11 md:h-11"
+              : "relative flex items-center justify-center w-10 h-10 border border-black/20 bg-transparent rounded-full md:w-11 md:h-11"
           }
           type="button"
           onClick={handleChangePageFirst}
         >
           <svg
             className={
-              page === 1
-                ? "absolute left-[13px] fill-black/50 rotate-90"
-                : "absolute left-[13px] fill-black rotate-90"
+              currentPage === 1
+                ? "absolute left-[13px] fill-black/50 rotate-90 md:left-[15px] md:w-6 md:h-6"
+                : "absolute left-[13px] fill-black rotate-90 md:left-[15px] md:w-6 md:h-6"
             }
             width={20}
             height={20}
@@ -58,9 +45,9 @@ const Pagination = ({ updateSearchParams }) => {
           </svg>
           <svg
             className={
-              page === 1
-                ? "absolute right-[13px] fill-black/50 rotate-90"
-                : "absolute right-[13px] fill-black rotate-90"
+              currentPage === 1
+                ? "absolute right-[13px] fill-black/50 rotate-90 md:right-[15px] md:w-6 md:h-6"
+                : "absolute right-[13px] fill-black rotate-90 md:right-[15px] md:w-6 md:h-6"
             }
             width={20}
             height={20}
@@ -70,16 +57,18 @@ const Pagination = ({ updateSearchParams }) => {
         </button>
         <button
           className={
-            page === 1
-              ? "flex items-center justify-center w-10 h-10 border border-black/5 bg-transparent rounded-full"
-              : "flex items-center justify-center w-10 h-10 border border-black/20 bg-transparent rounded-full"
+            currentPage === 1
+              ? "flex items-center justify-center w-10 h-10 border border-black/5 bg-transparent rounded-full md:w-11 md:h-11"
+              : "flex items-center justify-center w-10 h-10 border border-black/20 bg-transparent rounded-full md:w-11 md:h-11"
           }
           type="button"
           onClick={handleChangePageBack}
         >
           <svg
             className={
-              page === 1 ? "fill-black/50 rotate-90" : "fill-black rotate-90"
+              currentPage === 1
+                ? "fill-black/50 rotate-90 md:w-6 md:h-6"
+                : "fill-black rotate-90 md:w-6 md:h-6"
             }
             width={20}
             height={20}
@@ -90,43 +79,51 @@ const Pagination = ({ updateSearchParams }) => {
       </div>
       <div className="flex gap-2.5">
         <button
-          className="flex items-center justify-center w-10 h-10 border border-orange bg-orange rounded-full text-sm text-white font-bold leading-4.5"
+          className="flex items-center justify-center w-10 h-10 border border-orange bg-orange rounded-full text-sm text-white font-bold leading-4.5 md:w-11 md:h-11 md:text-lg md:leading-5.5"
           type="button"
         >
-          {page}
+          {currentPage}
         </button>
-        {page < totalPages && (
+        {currentPage < totalPages && (
           <button
-            className="flex items-center justify-center w-10 h-10 border border-black/5 bg-transparent rounded-full text-sm text-black font-bold leading-4.5"
+            className="flex items-center justify-center w-10 h-10 border border-black/5 bg-transparent rounded-full text-sm text-black font-bold leading-4.5 md:w-11 md:h-11 md:text-lg md:leading-5.5"
             type="button"
           >
-            {Number(page) + 1}
+            {Number(currentPage) + 1}
           </button>
         )}
-        {page < totalPages && (
+        {windowWidth >= 768 && currentPage < totalPages && (
           <button
-            className="flex items-center justify-center w-10 h-10 border border-black/5 bg-transparent rounded-full"
+            className="flex items-center justify-center w-10 h-10 border border-black/5 bg-transparent rounded-full text-sm text-black font-bold leading-4.5 md:w-11 md:h-11 md:text-lg md:leading-5.5"
+            type="button"
+          >
+            {Number(currentPage) + 2}
+          </button>
+        )}
+        {currentPage < totalPages && (
+          <button
+            className="flex items-center justify-center w-10 h-10 text-base leading-5 border border-black/5 bg-transparent rounded-full md:w-11 md:h-11 md:text-xl md:leading-5.5"
             type="button"
           >
             ...
           </button>
         )}
       </div>
-      <div className="flex gap-1.5">
+      <div className="flex gap-1.5 md:gap-2">
         <button
           className={
-            page < totalPages
-              ? "flex items-center justify-center w-10 h-10 border border-black/20 bg-transparent rounded-full"
-              : "flex items-center justify-center w-10 h-10 border border-black/5 bg-transparent rounded-full"
+            currentPage < totalPages
+              ? "flex items-center justify-center w-10 h-10 border border-black/20 bg-transparent rounded-full md:w-11 md:h-11"
+              : "flex items-center justify-center w-10 h-10 border border-black/5 bg-transparent rounded-full md:w-11 md:h-11"
           }
           type="button"
           onClick={handleChangePageNext}
         >
           <svg
             className={
-              page < totalPages
-                ? "fill-black rotate-270"
-                : "fill-black/50 rotate-270"
+              currentPage < totalPages
+                ? "fill-black rotate-270 md:w-6 md:h-6"
+                : "fill-black/50 rotate-270 md:w-6 md:h-6"
             }
             width={20}
             height={20}
@@ -136,18 +133,18 @@ const Pagination = ({ updateSearchParams }) => {
         </button>
         <button
           className={
-            page < totalPages
-              ? "relative flex items-center justify-center w-10 h-10 border border-black/20 bg-transparent rounded-full"
-              : "relative flex items-center justify-center w-10 h-10 border border-black/5 bg-transparent rounded-full"
+            currentPage < totalPages
+              ? "relative flex items-center justify-center w-10 h-10 border border-black/20 bg-transparent rounded-full md:w-11 md:h-11"
+              : "relative flex items-center justify-center w-10 h-10 border border-black/5 bg-transparent rounded-full md:w-11 md:h-11"
           }
           type="button"
           onClick={handleChangePageLast}
         >
           <svg
             className={
-              page < totalPages
-                ? "absolute left-[13px] fill-black rotate-270"
-                : "absolute left-[13px] fill-black/50 rotate-270"
+              currentPage < totalPages
+                ? "absolute left-[13px] fill-black rotate-270 md:left-[14px] md:w-6 md:h-6"
+                : "absolute left-[13px] fill-black/50 rotate-270 md:left-[14px] md:w-6 md:h-6"
             }
             width={20}
             height={20}
@@ -156,9 +153,9 @@ const Pagination = ({ updateSearchParams }) => {
           </svg>
           <svg
             className={
-              page < totalPages
-                ? "absolute right-[13px] fill-black rotate-270"
-                : "absolute right-[13px] fill-black/50 rotate-270"
+              currentPage < totalPages
+                ? "absolute right-[14px] fill-black rotate-270 md:right-[13px] md:w-6 md:h-6"
+                : "absolute right-[14px] fill-black/50 rotate-270 md:right-[13px] md:w-6 md:h-6"
             }
             width={20}
             height={20}

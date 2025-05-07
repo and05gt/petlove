@@ -3,13 +3,16 @@ import { petloveApi } from "../users/operations.js";
 
 export const fetchNews = createAsyncThunk(
   "news/getNews",
-  async ({ query, page }, thunkAPI) => {
+  async ({ page, keyword }, thunkAPI) => {
     try {
       const { data } = await petloveApi.get(
-        `/news?keyword=${query}&page=${page}&limit=6`
+        `/news?page=${page}&keyword=${keyword}`
       );
       return data;
     } catch (error) {
+      if (error.status === 404) {
+        return thunkAPI.rejectWithValue("Not found news!");
+      }
       return thunkAPI.rejectWithValue(error.message);
     }
   }

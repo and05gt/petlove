@@ -4,24 +4,36 @@ import mainTabImg from "../assets/img/main-tab@1x.webp";
 import mainTabImg2x from "../assets/img/main-tab@2x.webp";
 import mainDeskImg from "../assets/img/main-desk@1x.webp";
 import mainDeskImg2x from "../assets/img/main-desk@2x.webp";
+import sprite from "../assets/sprite.svg";
 import { useEffect, useState } from "react";
 
 const Loader = () => {
   const [progress, setProgress] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          return 100;
-        }
-        return prev + 1;
-      });
-    }, 10);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 100);
 
-    return () => clearInterval(interval);
+    return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const interval = setInterval(() => {
+        setProgress((prev) => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            return 100;
+          }
+          return prev + 1;
+        });
+      }, 10);
+
+      return () => clearInterval(interval);
+    }
+  }, [isLoading]);
 
   return (
     <div className="fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center">
@@ -40,10 +52,27 @@ const Loader = () => {
         />
         <img src={mainDeskImg} alt="Main Image" />
       </picture>
-      <div className="absolute w-72 h-72 rotate-[-175deg] border-2 border-white/30 rounded-[270px]"></div>
-      <p className=" absolute text-white text-[50px] font-bold leading-12.5 tracking-[-2px]">
-        {progress}%
-      </p>
+      {isLoading ? (
+        <p className="absolute inline-flex items-center text-white text-[50px] font-bold leading-12.5 tracking-[-0.04em]">
+          petl
+          <span className="w-11 h-11">
+            <svg width={44} height={44} className="fill-orange">
+              <use href={sprite + "#icon-heart-circle"}></use>
+            </svg>
+          </span>
+          ve
+        </p>
+      ) : (
+        <>
+          <div
+            style={{ transform: `rotate(${(progress / 100) * 360}deg)` }}
+            className="absolute w-72 h-72 border-2 border-white/30 rounded-[270px]"
+          ></div>
+          <p className=" absolute text-white text-[50px] font-bold leading-12.5 tracking-[-2px]">
+            {progress}%
+          </p>
+        </>
+      )}
     </div>
   );
 };

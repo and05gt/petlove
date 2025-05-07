@@ -5,21 +5,34 @@ import { useDispatch } from "react-redux";
 import { logOut } from "../redux/users/operations.js";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-const ModalApproveAction = ({ isOpen, onClose }) => {
+const ModalApproveAction = ({ isOpen, onClose, handleCloseModal }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    document.addEventListener("keydown", handleCloseModal);
+
+    return () => {
+      document.removeEventListener("keydown", handleCloseModal);
+    };
+  }, [handleCloseModal]);
 
   const handleLogout = () => {
     dispatch(logOut());
     toast.success("Sign out success");
     navigate("/home");
+    onClose();
   };
 
+  if (!isOpen) return null;
+
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-black/30 flex justify-center items-center">
+    <div
+      className="fixed top-0 left-0 w-full h-full bg-black/30 flex justify-center items-center"
+      onClick={handleCloseModal}
+    >
       <div className="relative flex flex-col items-center w-[335px] px-7 py-10 bg-white rounded-[30px]">
         <button
           className="absolute top-5 right-5"

@@ -5,36 +5,24 @@ import Pagination from "../components/Pagination.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchNews } from "../redux/news/operations.js";
-import { selectPage } from "../redux/news/selectors.js";
-import { useSearchParams } from "react-router-dom";
+import { selectTotalPages } from "../redux/news/selectors.js";
 
 const NewsPage = () => {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState("");
-  const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get("keyword") ?? "";
-  const page = useSelector(selectPage);
+  const [keyword, setKeyword] = useState("");
+  const totalPages = useSelector(selectTotalPages);
+  const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
-    dispatch(fetchNews({ query, page }));
-  }, [dispatch, query, page]);
-
-  const updateSearchParams = (key, value) => {
-    const updatedParams = new URLSearchParams(searchParams);
-    if (value !== "") {
-      updatedParams.set(key, value);
-    } else {
-      updatedParams.delete(key);
-    }
-
-    setSearchParams(updatedParams);
-  };
+    dispatch(fetchNews({ page: pageNumber, keyword }));
+  }, [dispatch, pageNumber, keyword]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const query = form.elements.search.value;
-    updateSearchParams("keyword", query);
+    setKeyword(query);
     setInputValue("");
   };
 
@@ -47,20 +35,23 @@ const NewsPage = () => {
   };
 
   return (
-    <section className="pb-20">
-      <Title mb={"20px"} tracking={"-0.84px"}>
-        News
-      </Title>
-      <form onSubmit={handleSubmit}>
-        <SearchField
-          mb={"24px"}
-          inputValue={inputValue}
-          handleInputChange={handleInputChange}
-          handleClearQuery={handleClearQuery}
-        />
-      </form>
+    <section className="pt-8 pb-20 md:pt-[59px] xl:px-8 xl:pt-17.5">
+      <div className="flex flex-col gap-5 mb-6 md:flex-row md:justify-between md:items-center">
+        <Title>News</Title>
+        <form onSubmit={handleSubmit}>
+          <SearchField
+            inputValue={inputValue}
+            handleInputChange={handleInputChange}
+            handleClearQuery={handleClearQuery}
+          />
+        </form>
+      </div>
       <NewsList />
-      <Pagination updateSearchParams={updateSearchParams} />
+      <Pagination
+        currentPage={pageNumber}
+        totalPages={totalPages}
+        setPageNumber={setPageNumber}
+      />
     </section>
   );
 };

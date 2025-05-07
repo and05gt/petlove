@@ -1,15 +1,25 @@
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import sprite from "../assets/sprite.svg";
 import Nav from "../components/Nav.jsx";
 import AuthNav from "./AuthNav.jsx";
 import UserNav from "./UserNav.jsx";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../redux/users/selectors.js";
+import useResponsive from "../hooks/useResponsive.js";
+import { useLocation } from "react-router-dom";
+import { noScroll } from "../utils/noScroll.js";
 
 const BurgerMenu = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const { windowWidth } = useResponsive();
+  const location = useLocation();
+  const isHomePage = location.pathname === "/home";
+
+  useEffect(() => {
+    noScroll(isMenuOpen);
+  }, [isMenuOpen]);
 
   const handleCloseMenu = (e) => {
     e.stopPropagation();
@@ -38,14 +48,22 @@ const BurgerMenu = () => {
         className="flex items-center"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
-        <svg width={32} height={32}>
+        <svg
+          className={isHomePage ? "fill-white md:w-9 md:h-9" : "md:w-9 md:h-9"}
+          width={32}
+          height={32}
+        >
           <use href={sprite + "#icon-menu"}></use>
         </svg>
       </button>
 
       {isMenuOpen && (
         <div
-          className="absolute top-0 right-0 z-10 w-54.5 h-[100vh] bg-white flex flex-col items-center justify-between pt-59 pb-10"
+          className={
+            isHomePage
+              ? "absolute top-0 right-0 z-10 w-54.5 h-[100vh] bg-white flex flex-col items-center justify-between pt-59 pb-10"
+              : "absolute top-0 right-0 z-10 w-54.5 h-[100vh] bg-orange flex flex-col items-center justify-between pt-59 pb-10"
+          }
           ref={menuRef}
           onClick={handleCloseMenu}
         >
@@ -54,13 +72,18 @@ const BurgerMenu = () => {
             className="absolute top-7 right-5"
             onClick={handleCloseMenu}
           >
-            <svg width={32} height={32}>
+            <svg
+              className={isHomePage ? "fill-black" : "fill-white"}
+              width={32}
+              height={32}
+            >
               <use href={sprite + "#icon-close"}></use>
             </svg>
           </button>
           <Nav />
-          <AuthNav />
-          {isLoggedIn && <UserNav />}
+          {windowWidth < 768 && (
+            <div>{isLoggedIn ? <UserNav /> : <AuthNav />}</div>
+          )}
         </div>
       )}
     </>

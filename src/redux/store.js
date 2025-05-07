@@ -13,12 +13,22 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { noticesReducer } from "./notices/slice.js";
+import { filtersReducer } from "./filters/slice.js";
+import { citiesReducer } from "./cities/slice.js";
 
 const authPersistConfig = {
   key: "root-auth",
   version: 1,
   storage,
-  whitelist: ["token"],
+  whitelist: ["token", "noticesFavorites", "noticesViewed"],
+};
+
+const noticesPersistConfig = {
+  key: "root-favorites",
+  version: 1,
+  storage,
+  whitelist: ["favorites"],
 };
 
 export const store = configureStore({
@@ -26,6 +36,9 @@ export const store = configureStore({
     users: persistReducer(authPersistConfig, usersReducer),
     news: newsReducer,
     friends: friendsReducer,
+    notices: persistReducer(noticesPersistConfig, noticesReducer),
+    cities: citiesReducer,
+    filters: filtersReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

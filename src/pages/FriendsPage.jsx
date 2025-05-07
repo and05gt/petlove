@@ -12,10 +12,8 @@ const FriendsPage = () => {
   }, [dispatch]);
 
   return (
-    <section className="pb-20">
-      <Title mb={"40px"} tracking={"-0.84px"}>
-        Our friends
-      </Title>
+    <section className="flex flex-col gap-10 pt-8 pb-20 md:pt-[53px] md:gap-11 xl:px-8 xl:pt-16 xl:gap-15">
+      <Title>Our friends</Title>
       <FriendsList />
     </section>
   );

@@ -1,11 +1,11 @@
 import { lazy, Suspense, useEffect } from "react";
 import "./App.css";
 import Layout from "./components/Layout.jsx";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Loader from "./components/Loader.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing } from "./redux/users/selectors.js";
-import { getCurrentUser } from "./redux/users/operations.js";
+import { refreshUser } from "./redux/users/operations.js";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import RestrictedRoute from "./components/RestrictedRoute.jsx";
 const HomePage = lazy(() => import("./pages/HomePage.jsx"));
@@ -23,7 +23,7 @@ const App = () => {
   const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    dispatch(getCurrentUser());
+    dispatch(refreshUser());
   }, [dispatch]);
 
   return isRefreshing ? (
@@ -32,6 +32,7 @@ const App = () => {
     <Suspense fallback={null}>
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route index element={<Navigate to="/home" />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/notices" element={<NoticesPage />} />
@@ -57,12 +58,14 @@ const App = () => {
           <Route
             path="/profile"
             element={
-              <PrivateRoute component={<ProfilePage />} redirectTo="/" />
+              <PrivateRoute component={<ProfilePage />} redirectTo="/login" />
             }
           />
           <Route
             path="/add-pet"
-            element={<PrivateRoute component={<AddPetPage />} redirectTo="/" />}
+            element={
+              <PrivateRoute component={<AddPetPage />} redirectTo="/login" />
+            }
           />
           <Route path="*" element={<NotFoundPage />} />
         </Route>

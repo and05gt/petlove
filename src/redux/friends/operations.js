@@ -8,6 +8,9 @@ export const fetchFriends = createAsyncThunk(
       const { data } = await petloveApi.get("/friends/");
       return data;
     } catch (error) {
+      if (error.status === 404) {
+        return thunkAPI.rejectWithValue("Not found friends!");
+      }
       return thunkAPI.rejectWithValue(error.message);
     }
   }

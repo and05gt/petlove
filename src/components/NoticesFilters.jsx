@@ -1,36 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import sprite from "../assets/sprite.svg";
 import SearchField from "./SearchField.jsx";
 import Select, { components } from "react-select";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectCategories,
+  selectGenders,
+  selectSpecies,
+} from "../redux/notices/selectors.js";
+import { useForm, Controller } from "react-hook-form";
+import { changeFilters } from "../redux/filters/slice.js";
+import { selectCities } from "../redux/cities/selectors.js";
+import clsx from "clsx";
 
 const NoticesFilters = () => {
+  const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState("");
+  const [keyword, setKeyword] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedGender, setSelectedGender] = useState(null);
   const [selectedType, setSelectedType] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectByPopularity, setSelectByPopularity] = useState(null);
+  const [selectByPrice, setSelectByPrice] = useState(null);
+  const categories = useSelector(selectCategories);
+  const genders = useSelector(selectGenders);
+  const species = useSelector(selectSpecies);
+  const cities = useSelector(selectCities);
 
-  const customSelectStyles = {
-    control: (base) => ({
-      ...base,
-      height: "42px",
-      borderRadius: "30px",
-      border: "none",
-      boxShadow: "none",
-    }),
-    menu: (base) => ({
-      ...base,
-      borderRadius: "30px",
-      border: "none",
-      overflow: "hidden",
-    }),
-    indicatorSeparator: (base) => ({
-      ...base,
-      display: "none",
-    }),
-    placeholder: (base) => ({
-      ...base,
-      color: "#262626",
-    }),
+  const controlStyles =
+    "hover:cursor-pointer rounded-[30px] bg-white h-10.5 p-3 md:h-12 md:p-3.5";
+  const singleValueStyles = "md:text-base md:leading-5 md:tracking-[-0.03em]";
+  const menuStyles =
+    "p-3 mt-1 bg-white rounded-[15px] md:text-base md:leading-5 md:tracking-[-0.03em]";
+  const menuListStyles = "h-36.5 md:h-40 overflow-y-auto";
+  const placeholderStyles =
+    "text-black md:text-base md:leading-5 md:tracking-[-0.03em]";
+  const optionStyles = {
+    base: "capitalize text-black/60",
+    focus: "active:text-orange",
+    selected: "text-orange",
   };
 
   const DropdownIndicatorChevron = (props) => (
@@ -49,86 +58,325 @@ const NoticesFilters = () => {
     </components.DropdownIndicator>
   );
 
+  const { register, control, watch, reset } = useForm({
+    defaultValues: {
+      keyword: keyword,
+      category: selectedCategory,
+      sex: selectedGender,
+      species: selectedType,
+      locationId: selectedLocation,
+      byPopularity: selectByPopularity,
+      byPrice: selectByPrice,
+    },
+  });
+
+  const watchFields = watch();
+
+  useEffect(() => {
+    dispatch(
+      changeFilters({
+        ...watchFields,
+        keyword: keyword,
+        category: selectedCategory,
+        sex: selectedGender,
+        species: selectedType,
+        locationId: selectedLocation,
+        byPopularity: selectByPopularity,
+        byPrice: selectByPrice,
+      })
+    );
+  }, [
+    dispatch,
+    keyword,
+    selectedCategory,
+    selectedGender,
+    selectedType,
+    selectedLocation,
+    selectByPopularity,
+    selectByPrice,
+  ]);
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleClearQuery = () => {
+    setInputValue("");
+  };
+
+  const handleBlur = (e) => {
+    e.preventDefault();
+    setKeyword(e.target.value);
+  };
+
   return (
-    <form className="w-[335px] px-5 py-5 bg-brown-light rounded-[30px] mb-10">
-      <div className="flex flex-col gap-3 pb-5 mb-5 border-b-[1px] border-black/10">
-        <SearchField />
-        <div className="flex gap-2">
-          <Select
-            styles={customSelectStyles}
-            components={{ DropdownIndicator: DropdownIndicatorChevron }}
-            className="w-[143px]"
-            placeholder="Category"
+    <form className="w-[335px] p-5 bg-brown-light rounded-[30px] mb-10 md:w-176 md:px-8 md:py-10 xl:w-304 xl:p-10">
+      <div className="flex flex-col gap-3 pb-5 mb-5 border-b-[1px] border-black/10 md:flex-row md:flex-wrap md:gap-4">
+        <SearchField
+          inputValue={inputValue}
+          handleInputChange={handleInputChange}
+          handleClearQuery={handleClearQuery}
+          onBlur={handleBlur}
+        />
+        <div className="flex gap-2 md:gap-4">
+          <Controller
+            name="category"
+            control={control}
             defaultValue={selectedCategory}
-            onChange={setSelectedCategory}
+            render={({ field }) => (
+              <Select
+                {...field}
+                components={{ DropdownIndicator: DropdownIndicatorChevron }}
+                className="w-[143px] md:w-42.5 xl:w-50"
+                classNames={{
+                  control: () => controlStyles,
+                  singleValue: () => singleValueStyles,
+                  menu: () => menuStyles,
+                  menuList: () => menuListStyles,
+                  placeholder: () => placeholderStyles,
+                  option: ({ isFocused, isSelected }) =>
+                    clsx(
+                      isFocused && optionStyles.focus,
+                      isSelected && optionStyles.selected,
+                      optionStyles.base
+                    ),
+                }}
+                placeholder="Category"
+                onChange={(option) => {
+                  setSelectedCategory(option.value);
+                  field.onChange(option);
+                }}
+                options={[
+                  { label: "Show all", value: "" },
+                  ...categories.map((category) => ({
+                    label: category,
+                    value: category,
+                  })),
+                ]}
+                unstyled
+              />
+            )}
           />
-          <Select
-            styles={customSelectStyles}
-            components={{ DropdownIndicator: DropdownIndicatorChevron }}
-            className="w-36"
-            placeholder="By gender"
+          <Controller
+            name="sex"
+            control={control}
             defaultValue={selectedGender}
-            onChange={setSelectedGender}
+            render={({ field }) => (
+              <Select
+                {...field}
+                components={{ DropdownIndicator: DropdownIndicatorChevron }}
+                className="w-36 md:w-42.5 xl:w-47.5"
+                classNames={{
+                  control: () => controlStyles,
+                  singleValue: () => singleValueStyles,
+                  menu: () => menuStyles,
+                  menuList: () => menuListStyles,
+                  placeholder: () => placeholderStyles,
+                  option: ({ isFocused, isSelected }) =>
+                    clsx(
+                      isFocused && optionStyles.focus,
+                      isSelected && optionStyles.selected,
+                      optionStyles.base
+                    ),
+                }}
+                placeholder="By gender"
+                onChange={(option) => {
+                  setSelectedGender(option.value);
+                  field.onChange(option);
+                }}
+                options={[
+                  { label: "Show all", value: "" },
+                  ...genders.map((gender) => ({
+                    label: gender,
+                    value: gender,
+                  })),
+                ]}
+                unstyled
+              />
+            )}
           />
         </div>
-        <Select
-          styles={customSelectStyles}
-          components={{ DropdownIndicator: DropdownIndicatorChevron }}
-          className="w-full"
-          placeholder="By type"
+        <Controller
+          name="species"
+          control={control}
           defaultValue={selectedType}
-          onChange={setSelectedType}
+          render={({ field }) => (
+            <Select
+              {...field}
+              components={{ DropdownIndicator: DropdownIndicatorChevron }}
+              className="w-full md:w-47.5"
+              classNames={{
+                control: () => controlStyles,
+                singleValue: () => singleValueStyles,
+                menu: () => menuStyles,
+                menuList: () => "h-54",
+                placeholder: () => placeholderStyles,
+                option: ({ isFocused, isSelected }) =>
+                  clsx(
+                    isFocused && optionStyles.focus,
+                    isSelected && optionStyles.selected,
+                    optionStyles.base
+                  ),
+              }}
+              placeholder="By type"
+              onChange={(option) => {
+                setSelectedType(option.value);
+                field.onChange(option);
+              }}
+              options={[
+                { label: "Show all", value: "" },
+                ...species.map((specie) => ({
+                  label: specie,
+                  value: specie,
+                })),
+              ]}
+              unstyled
+            />
+          )}
         />
-        <Select
-          styles={customSelectStyles}
-          components={{ DropdownIndicator: DropdownIndicatorSearch }}
-          className="w-full"
-          placeholder="Location"
-          defaultValue={selectedLocation}
-          onChange={setSelectedLocation}
+        <Controller
+          name="locationId"
+          control={control}
+          render={({ field }) => (
+            <Select
+              {...field}
+              components={{ DropdownIndicator: DropdownIndicatorSearch }}
+              className="w-full md:w-[227px]"
+              classNames={{
+                control: () => controlStyles,
+                singleValue: () => singleValueStyles,
+                menu: () => menuStyles,
+                menuList: () => menuListStyles,
+                placeholder: () => placeholderStyles,
+                option: ({ isFocused, isSelected }) =>
+                  clsx(
+                    isFocused && optionStyles.focus,
+                    isSelected && optionStyles.selected,
+                    optionStyles.base
+                  ),
+              }}
+              placeholder="Location"
+              defaultValue={selectedLocation}
+              onChange={(option) => {
+                setSelectedLocation(option.value);
+                field.onChange(option);
+              }}
+              options={cities.map((city) => ({
+                label: `${city.stateEn}, ${city.cityEn}`,
+                value: city._id,
+              }))}
+              unstyled
+            />
+          )}
         />
       </div>
-      <div className="flex flex-wrap gap-x-2.5 gap-y-2.5">
+      <div className="flex flex-wrap gap-x-2.5 gap-y-2.5 md:gap-2">
         <label
-          className="h-10.5 bg-white rounded-[30px] p-3 has-checked:bg-orange has-checked:text-white"
+          className="h-10.5 bg-white rounded-[30px] p-3 tracking-[-0.03em] flex items-center gap-1.5 cursor-pointer has-checked:bg-orange has-checked:text-white md:h-12 md:p-3.5 md:gap-2 md:text-base md:leading-5"
           htmlFor="popular"
         >
           Popular
-          <input className="hidden" type="radio" name="sorting" id="popular" />
+          <input
+            {...register("byPopularity")}
+            className="peer hidden"
+            type="radio"
+            name="sorting"
+            id="popular"
+            value="false"
+            onChange={(e) => {
+              setSelectByPopularity(e.target.value);
+            }}
+          />
+          <button
+            className="hidden peer-checked:block"
+            type="button"
+            onClick={() => reset()}
+          >
+            <svg className="fill-white" width={18} height={18}>
+              <use href={sprite + "#icon-close"}></use>
+            </svg>
+          </button>
         </label>
 
         <label
-          className="h-10.5 bg-white rounded-[30px] p-3 has-checked:bg-orange has-checked:text-white"
+          className="h-10.5 bg-white rounded-[30px] p-3 tracking-[-0.03em] flex items-center gap-1.5 cursor-pointer has-checked:bg-orange has-checked:text-white md:h-12 md:p-3.5 md:gap-2 md:text-base md:leading-5"
           htmlFor="unpopular"
         >
           Unpopular
           <input
-            className="hidden"
+            {...register("byPopularity")}
+            className="peer hidden"
             type="radio"
             name="sorting"
             id="unpopular"
+            value="true"
+            onChange={(e) => {
+              setSelectByPopularity(e.target.value);
+            }}
           />
+          <button
+            className="hidden peer-checked:block"
+            type="button"
+            onClick={() => reset()}
+          >
+            <svg className="fill-white" width={18} height={18}>
+              <use href={sprite + "#icon-close"}></use>
+            </svg>
+          </button>
         </label>
 
         <label
-          className="h-10.5 bg-white rounded-[30px] p-3 has-checked:bg-orange has-checked:text-white"
+          className="h-10.5 bg-white rounded-[30px] p-3 tracking-[-0.03em] flex items-center gap-1.5 cursor-pointer has-checked:bg-orange has-checked:text-white md:h-12 md:p-3.5 md:gap-2 md:text-base md:leading-5"
           htmlFor="cheap"
         >
           Cheap
-          <input className="hidden" type="radio" name="sorting" id="cheap" />
+          <input
+            {...register("byPrice")}
+            className="peer hidden"
+            type="radio"
+            name="sorting"
+            id="cheap"
+            value="false"
+            onChange={(e) => {
+              setSelectByPrice(e.target.value);
+            }}
+          />
+          <button
+            className="hidden peer-checked:block"
+            type="button"
+            onClick={() => reset()}
+          >
+            <svg className="fill-white" width={18} height={18}>
+              <use href={sprite + "#icon-close"}></use>
+            </svg>
+          </button>
         </label>
 
         <label
-          className="h-10.5 bg-white rounded-[30px] p-3 has-checked:bg-orange has-checked:text-white"
+          className="h-10.5 bg-white rounded-[30px] p-3 tracking-[-0.03em] flex items-center gap-1.5 cursor-pointer has-checked:bg-orange has-checked:text-white md:h-12 md:p-3.5 md:gap-2 md:text-base md:leading-5"
           htmlFor="expensive"
         >
           Expensive
           <input
-            className="hidden"
+            {...register("byPrice")}
+            className="peer hidden"
             type="radio"
             name="sorting"
             id="expensive"
+            value="true"
+            onChange={(e) => {
+              setSelectByPrice(e.target.value);
+            }}
           />
+          <button
+            className="hidden peer-checked:block"
+            type="button"
+            onClick={() => reset()}
+          >
+            <svg className="fill-white" width={18} height={18}>
+              <use href={sprite + "#icon-close"}></use>
+            </svg>
+          </button>
         </label>
       </div>
     </form>

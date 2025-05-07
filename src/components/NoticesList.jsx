@@ -1,23 +1,28 @@
-import { useState } from "react";
-import ModalAttention from "./ModalAttention.jsx";
 import NoticesItem from "./NoticesItem.jsx";
-import ModalNotice from "./ModalNotice.jsx";
+import { useSelector } from "react-redux";
+import {
+  selectError,
+  selectIsLoading,
+  selectNotices,
+} from "../redux/notices/selectors.js";
+import Loader from "./Loader.jsx";
 
 const NoticesList = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalNoticeOpen, setIsModalNoticeOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
-  const openModalNotice = () => setIsModalNoticeOpen(true);
-  const closeModalNotice = () => setIsModalNoticeOpen(false);
+  const notices = useSelector(selectNotices);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
   return (
     <>
-      <NoticesItem onClick={openModal} onClickHeart={openModalNotice} />
-      <ModalAttention isOpen={isModalOpen} onClose={closeModal} />
-      <ModalNotice isOpen={isModalNoticeOpen} onClose={closeModalNotice} />
+      {isLoading && <Loader />}
+      {error && <h3>{error}</h3>}
+      <ul className="flex flex-col gap-5 mb-11 md:flex-row md:flex-wrap md:mb-15 xl:w-[1153px] xl:gap-x-8 xl:gap-y-10">
+        {notices?.map((notice) => (
+          <li key={notice._id}>
+            <NoticesItem notice={notice} />
+          </li>
+        ))}
+      </ul>
     </>
   );
 };

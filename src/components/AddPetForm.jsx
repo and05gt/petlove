@@ -158,21 +158,21 @@ const AddPetForm = () => {
           </label>
           <label
             className="flex items-center justify-center w-8 h-8 bg-orange/10 rounded-full cursor-pointer has-checked:bg-orange"
-            htmlFor="unknown"
+            htmlFor="multiple"
           >
             <input
               {...register("sex")}
               className="hidden peer"
               type="radio"
-              id="unknown"
-              value="unknown"
+              id="multiple"
+              value="multiple"
             />
             <svg
               width={20}
               height={20}
               className="fill-orange peer-checked:fill-white"
             >
-              <use href={sprite + "#icon-unknown"}></use>
+              <use href={sprite + "#icon-multiple"}></use>
             </svg>
           </label>
         </div>
@@ -278,17 +278,6 @@ const AddPetForm = () => {
                 />
               )}
             />
-            {/* <Select
-              {...register("species")}
-              styles={customSelectStyles}
-              components={{ DropdownIndicator: DropdownIndicatorChevron }}
-              className="w-[143px]"
-              placeholder="Type of pet"
-              defaultValue={selectedType}
-              onChange={setSelectedType}
-              options={options}
-              value={selectedType}
-            /> */}
           </div>
         </div>
         <div className="flex items-center justify-end gap-2">

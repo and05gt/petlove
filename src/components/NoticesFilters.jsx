@@ -30,7 +30,8 @@ const NoticesFilters = () => {
 
   const controlStyles =
     "hover:cursor-pointer rounded-[30px] bg-white h-10.5 p-3 md:h-12 md:p-3.5";
-  const singleValueStyles = "md:text-base md:leading-5 md:tracking-[-0.03em]";
+  const singleValueStyles =
+    "capitalize md:text-base md:leading-5 md:tracking-[-0.03em]";
   const menuStyles =
     "p-3 mt-1 bg-white rounded-[15px] md:text-base md:leading-5 md:tracking-[-0.03em]";
   const menuListStyles = "h-36.5 md:h-40 overflow-y-auto";
@@ -83,7 +84,7 @@ const NoticesFilters = () => {
         locationId: selectedLocation,
         byPopularity: selectByPopularity,
         byPrice: selectByPrice,
-      })
+      }),
     );
   }, [
     dispatch,
@@ -110,8 +111,8 @@ const NoticesFilters = () => {
   };
 
   return (
-    <form className="w-[335px] p-5 bg-brown-light rounded-[30px] mb-10 md:w-176 md:px-8 md:py-10 xl:w-304 xl:p-10">
-      <div className="flex flex-col gap-3 pb-5 mb-5 border-b-[1px] border-black/10 md:flex-row md:flex-wrap md:gap-4">
+    <form className="bg-brown-light mb-10 w-[335px] rounded-[30px] p-5 md:w-176 md:px-8 md:py-10 xl:w-304 xl:p-10">
+      <div className="mb-5 flex flex-col gap-3 border-b-[1px] border-black/10 pb-5 md:flex-row md:flex-wrap md:gap-4">
         <SearchField
           inputValue={inputValue}
           handleInputChange={handleInputChange}
@@ -138,7 +139,7 @@ const NoticesFilters = () => {
                     clsx(
                       isFocused && optionStyles.focus,
                       isSelected && optionStyles.selected,
-                      optionStyles.base
+                      optionStyles.base,
                     ),
                 }}
                 placeholder="Category"
@@ -176,7 +177,7 @@ const NoticesFilters = () => {
                     clsx(
                       isFocused && optionStyles.focus,
                       isSelected && optionStyles.selected,
-                      optionStyles.base
+                      optionStyles.base,
                     ),
                 }}
                 placeholder="By gender"
@@ -215,7 +216,7 @@ const NoticesFilters = () => {
                   clsx(
                     isFocused && optionStyles.focus,
                     isSelected && optionStyles.selected,
-                    optionStyles.base
+                    optionStyles.base,
                   ),
               }}
               placeholder="By type"
@@ -252,7 +253,7 @@ const NoticesFilters = () => {
                   clsx(
                     isFocused && optionStyles.focus,
                     isSelected && optionStyles.selected,
-                    optionStyles.base
+                    optionStyles.base,
                   ),
               }}
               placeholder="Location"
@@ -272,7 +273,7 @@ const NoticesFilters = () => {
       </div>
       <div className="flex flex-wrap gap-x-2.5 gap-y-2.5 md:gap-2">
         <label
-          className="h-10.5 bg-white rounded-[30px] p-3 tracking-[-0.03em] flex items-center gap-1.5 cursor-pointer has-checked:bg-orange has-checked:text-white md:h-12 md:p-3.5 md:gap-2 md:text-base md:leading-5"
+          className="has-checked:bg-orange flex h-10.5 cursor-pointer items-center gap-1.5 rounded-[30px] bg-white p-3 tracking-[-0.03em] has-checked:text-white md:h-12 md:gap-2 md:p-3.5 md:text-base md:leading-5"
           htmlFor="popular"
         >
           Popular
@@ -299,7 +300,7 @@ const NoticesFilters = () => {
         </label>
 
         <label
-          className="h-10.5 bg-white rounded-[30px] p-3 tracking-[-0.03em] flex items-center gap-1.5 cursor-pointer has-checked:bg-orange has-checked:text-white md:h-12 md:p-3.5 md:gap-2 md:text-base md:leading-5"
+          className="has-checked:bg-orange flex h-10.5 cursor-pointer items-center gap-1.5 rounded-[30px] bg-white p-3 tracking-[-0.03em] has-checked:text-white md:h-12 md:gap-2 md:p-3.5 md:text-base md:leading-5"
           htmlFor="unpopular"
         >
           Unpopular
@@ -326,7 +327,7 @@ const NoticesFilters = () => {
         </label>
 
         <label
-          className="h-10.5 bg-white rounded-[30px] p-3 tracking-[-0.03em] flex items-center gap-1.5 cursor-pointer has-checked:bg-orange has-checked:text-white md:h-12 md:p-3.5 md:gap-2 md:text-base md:leading-5"
+          className="has-checked:bg-orange flex h-10.5 cursor-pointer items-center gap-1.5 rounded-[30px] bg-white p-3 tracking-[-0.03em] has-checked:text-white md:h-12 md:gap-2 md:p-3.5 md:text-base md:leading-5"
           htmlFor="cheap"
         >
           Cheap
@@ -353,7 +354,7 @@ const NoticesFilters = () => {
         </label>
 
         <label
-          className="h-10.5 bg-white rounded-[30px] p-3 tracking-[-0.03em] flex items-center gap-1.5 cursor-pointer has-checked:bg-orange has-checked:text-white md:h-12 md:p-3.5 md:gap-2 md:text-base md:leading-5"
+          className="has-checked:bg-orange flex h-10.5 cursor-pointer items-center gap-1.5 rounded-[30px] bg-white p-3 tracking-[-0.03em] has-checked:text-white md:h-12 md:gap-2 md:p-3.5 md:text-base md:leading-5"
           htmlFor="expensive"
         >
           Expensive

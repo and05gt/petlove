@@ -1,6 +1,6 @@
 const PetBlock = ({ mob, tab, desk, src }) => {
   return (
-    <div className="rounded-[30px] bg-orange">
+    <div className="bg-orange rounded-[30px] md:rounded-[60px] xl:w-148">
       <picture>
         <source media={"(max-width: 767px)"} srcSet={mob} />
         <source
@@ -8,7 +8,11 @@ const PetBlock = ({ mob, tab, desk, src }) => {
           srcSet={tab}
         />
         <source media={"(min-width: 1280px)"} srcSet={desk} />
-        <img className="mt-0 mr-auto mb-0 ml-auto" src={src} alt="Pet image" />
+        <img
+          className="mx-auto my-0 xl:mt-1.5 xl:mb-0"
+          src={src}
+          alt="Pet image"
+        />
       </picture>
     </div>
   );

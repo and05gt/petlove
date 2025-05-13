@@ -5,6 +5,8 @@ import {
   selectNoticesFavorites,
   selectNoticesViewed,
 } from "../redux/users/selectors.js";
+import FavoritesList from "./FavoritesList.jsx";
+import ViewedList from "./ViewedList.jsx";
 
 const MyNotices = () => {
   const [activeTab, setActiveTab] = useState("my-favorite-pets");
@@ -24,13 +26,13 @@ const MyNotices = () => {
   };
 
   return (
-    <>
-      <div className="flex items-center justify-start gap-2.5">
+    <div className="xl:flex xl:flex-col xl:pt-10">
+      <div className="mb-5 flex items-center justify-start gap-2.5 md:gap-2">
         <button
           className={
             activeTab === "my-favorite-pets"
-              ? "w-[123px] h-10.5 bg-orange rounded-[30px] text-sm text-white font-medium leading-4.5 tracking-[-0.42px] border-0 outline-0 cursor-pointer"
-              : "w-[123px] h-10.5 bg-white rounded-[30px] text-sm text-black font-medium leading-4.5 tracking-[-0.42px] border-0 outline-0 cursor-pointer"
+              ? "bg-orange h-10.5 w-[123px] cursor-pointer rounded-[30px] border-0 text-sm leading-4.5 font-medium tracking-[-0.42px] text-white outline-0 md:h-12 md:w-35.5 md:text-base md:leading-5 md:tracking-[-0.03em]"
+              : "h-10.5 w-[123px] cursor-pointer rounded-[30px] border-0 bg-white text-sm leading-4.5 font-medium tracking-[-0.42px] text-black outline-0 md:h-12 md:w-35.5 md:text-base md:leading-5 md:tracking-[-0.03em]"
           }
           type="button"
           onClick={() => handleChangeTab("my-favorite-pets")}
@@ -40,8 +42,8 @@ const MyNotices = () => {
         <button
           className={
             activeTab === "viewed"
-              ? "w-[123px] h-10.5 bg-orange rounded-[30px] text-sm text-white font-medium leading-4.5 tracking-[-0.42px] border-0 outline-0 cursor-pointer"
-              : "w-[123px] h-10.5 bg-white rounded-[30px] text-sm text-black font-medium leading-4.5 tracking-[-0.42px] border-0 outline-0 cursor-pointer"
+              ? "bg-orange h-10.5 w-[123px] cursor-pointer rounded-[30px] border-0 text-sm leading-4.5 font-medium tracking-[-0.42px] text-white outline-0 md:h-12 md:w-35.5 md:text-base md:leading-5 md:tracking-[-0.03em]"
+              : "h-10.5 w-[123px] cursor-pointer rounded-[30px] border-0 bg-white text-sm leading-4.5 font-medium tracking-[-0.42px] text-black outline-0 md:h-12 md:w-35.5 md:text-base md:leading-5 md:tracking-[-0.03em]"
           }
           type="button"
           onClick={() => handleChangeTab("viewed")}
@@ -50,23 +52,11 @@ const MyNotices = () => {
         </button>
       </div>
       {activeTab === "my-favorite-pets" ? (
-        <ul className="flex flex-col gap-5 mb-11">
-          {favorites.map((favorite) => (
-            <li key={favorite._id}>
-              <NoticesItem notice={favorite} />
-            </li>
-          ))}
-        </ul>
+        <FavoritesList favorites={favorites} />
       ) : (
-        <ul className="flex flex-col gap-5 mb-11">
-          {viewed.map((item) => (
-            <li key={item._id}>
-              <NoticesItem notice={item} />
-            </li>
-          ))}
-        </ul>
+        <ViewedList viewed={viewed} />
       )}
-    </>
+    </div>
   );
 };
 export default MyNotices;

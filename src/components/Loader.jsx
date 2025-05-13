@@ -14,7 +14,7 @@ const Loader = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 100);
+    }, 200);
 
     return () => clearTimeout(timer);
   }, []);
@@ -36,7 +36,7 @@ const Loader = () => {
   }, [isLoading]);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center">
+    <div className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center">
       <picture>
         <source
           media={"(max-width: 767px)"}
@@ -53,9 +53,9 @@ const Loader = () => {
         <img src={mainDeskImg} alt="Main Image" />
       </picture>
       {isLoading ? (
-        <p className="absolute inline-flex items-center text-white text-[50px] font-bold leading-12.5 tracking-[-0.04em]">
+        <p className="absolute inline-flex items-center text-[50px] leading-12.5 font-bold tracking-[-0.04em] text-white">
           petl
-          <span className="w-11 h-11">
+          <span className="h-11 w-11">
             <svg width={44} height={44} className="fill-orange">
               <use href={sprite + "#icon-heart-circle"}></use>
             </svg>
@@ -66,9 +66,9 @@ const Loader = () => {
         <>
           <div
             style={{ transform: `rotate(${(progress / 100) * 360}deg)` }}
-            className="absolute w-72 h-72 border-2 border-white/30 rounded-[270px]"
+            className="absolute h-72 w-72 rounded-[270px] border-2 border-white/30"
           ></div>
-          <p className=" absolute text-white text-[50px] font-bold leading-12.5 tracking-[-2px]">
+          <p className="absolute text-[50px] leading-12.5 font-bold tracking-[-2px] text-white">
             {progress}%
           </p>
         </>

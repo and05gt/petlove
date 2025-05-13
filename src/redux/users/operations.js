@@ -32,7 +32,7 @@ export const registerUser = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const logIn = createAsyncThunk(
@@ -54,7 +54,7 @@ export const logIn = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const logOut = createAsyncThunk("users/logout", async (_, thunkAPI) => {
@@ -92,7 +92,7 @@ export const refreshUser = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const getCurrentUser = createAsyncThunk(
@@ -115,7 +115,7 @@ export const getCurrentUser = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const updateUser = createAsyncThunk(
@@ -141,7 +141,7 @@ export const updateUser = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const addUserPet = createAsyncThunk(
@@ -164,7 +164,7 @@ export const addUserPet = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const deleteUserPet = createAsyncThunk(
@@ -177,10 +177,8 @@ export const deleteUserPet = createAsyncThunk(
     setAuthHeader(savedToken);
     try {
       const { data } = await petloveApi.delete(
-        `/users/current/pets/remove/${petId}`
+        `/users/current/pets/remove/${petId}`,
       );
-      console.log("Deleted pet:", data);
-
       return data.pets;
     } catch (error) {
       if (error.status === 400) {
@@ -194,7 +192,7 @@ export const deleteUserPet = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const getViewedNotice = createAsyncThunk(
@@ -220,5 +218,5 @@ export const getViewedNotice = createAsyncThunk(
       }
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );

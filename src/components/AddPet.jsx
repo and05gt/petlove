@@ -3,10 +3,12 @@ import sprite from "../assets/sprite.svg";
 
 const AddPet = () => {
   return (
-    <div className="flex items-center justify-between mb-5">
-      <h3 className="text-base font-bold leading-5">My pets</h3>
+    <div className="mb-5 flex items-center justify-between">
+      <h3 className="text-base leading-5 font-bold md:text-lg md:leading-6">
+        My pets
+      </h3>
       <Link
-        className="flex items-center justify-center gap-1 w-[103px] h-9.5 bg-orange rounded-[30px] text-sm text-white font-medium leading-4.5 tracking-[-0.42px] border-0 outline-0 cursor-pointer"
+        className="bg-orange flex h-9.5 w-[103px] cursor-pointer items-center justify-center gap-1 rounded-[30px] border-0 text-sm leading-4.5 font-medium tracking-[-0.42px] text-white outline-0 md:h-10 md:w-29.5 md:text-base md:leading-5 md:tracking-[-0.03em]"
         to="/add-pet"
       >
         Add pet

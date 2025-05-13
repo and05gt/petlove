@@ -12,7 +12,7 @@ const ProfilePage = () => {
   }, [dispatch]);
 
   return (
-    <section className="flex flex-col gap-10">
+    <section className="flex flex-col pb-11 md:pb-15 xl:flex-row xl:gap-8 xl:pb-8">
       <UserCard />
       <MyNotices />
     </section>

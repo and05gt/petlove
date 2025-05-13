@@ -1,13 +1,12 @@
 import { useSelector } from "react-redux";
 import PetsItem from "./PetsItem.jsx";
-import { selectUser } from "../redux/users/selectors.js";
+import { selectPets } from "../redux/users/selectors.js";
 
 const PetsList = () => {
-  const user = useSelector(selectUser);
-  const pets = user?.pets;
+  const pets = useSelector(selectPets);
 
   return (
-    <ul className="flex flex-col gap-3.5 mb-5">
+    <ul className="mb-5 flex flex-col gap-3.5 md:flex-row md:flex-wrap xl:mb-10">
       {pets?.map((pet) => (
         <li key={pet._id}>
           <PetsItem pet={pet} />

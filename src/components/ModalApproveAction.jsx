@@ -30,20 +30,20 @@ const ModalApproveAction = ({ isOpen, onClose, handleCloseModal }) => {
 
   return (
     <div
-      className="fixed top-0 left-0 w-full h-full bg-black/30 flex justify-center items-center"
+      className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-black/30"
       onClick={handleCloseModal}
     >
-      <div className="relative flex flex-col items-center w-[335px] px-7 py-10 bg-white rounded-[30px]">
+      <div className="relative flex w-[335px] flex-col items-center rounded-[30px] bg-white px-7 py-10 md:w-112 md:p-20">
         <button
           className="absolute top-5 right-5"
           type="button"
           onClick={onClose}
         >
-          <svg className=" fill-black" width={24} height={24}>
+          <svg className="fill-black" width={24} height={24}>
             <use href={sprite + "#icon-close"}></use>
           </svg>
         </button>
-        <div className="flex items-center justify-center w-20 h-20 rounded-full bg-brown-light mb-5">
+        <div className="bg-brown-light mb-5 flex h-20 w-20 items-center justify-center rounded-full">
           <img
             src={catImg}
             alt="Cat Image"
@@ -52,19 +52,19 @@ const ModalApproveAction = ({ isOpen, onClose, handleCloseModal }) => {
             height={44}
           />
         </div>
-        <h2 className="text-xl font-bold leading-5 tracking-[-0.6px] mb-7">
+        <h2 className="mb-7 text-xl leading-5 font-bold tracking-[-0.6px] md:text-2xl md:leading-7 md:tracking-[-0.03em]">
           Already leaving?
         </h2>
         <div className="flex items-center justify-center gap-2">
           <button
-            className="w-[137px] h-10.5 bg-orange rounded-[30px] text-sm text-white font-bold leading-4.5 tracking-[-0.42px] border-0 outline-0 cursor-pointer"
+            className="bg-orange h-10.5 w-[137px] cursor-pointer rounded-[30px] border-0 text-sm leading-4.5 font-bold tracking-[-0.42px] text-white outline-0 md:h-12 md:w-35 md:text-base md:leading-5"
             type="button"
             onClick={handleLogout}
           >
             Yes
           </button>
           <button
-            className="w-[134px] h-10.5 bg-black/5 rounded-[30px] text-sm text-black font-bold leading-4.5 tracking-[-0.42px] border-0 outline-0 cursor-pointer"
+            className="h-10.5 w-[134px] cursor-pointer rounded-[30px] border-0 bg-black/5 text-sm leading-4.5 font-bold tracking-[-0.42px] text-black outline-0 md:h-12 md:w-35 md:text-base md:leading-5"
             type="button"
             onClick={onClose}
           >

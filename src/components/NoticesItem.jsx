@@ -11,6 +11,7 @@ import {
 import { addNoticeViewed } from "../redux/users/slice.js";
 import { selectFavorites } from "../redux/notices/selectors.js";
 import { getCurrentUser } from "../redux/users/operations.js";
+import { useLocation } from "react-router-dom";
 
 const NoticesItem = ({ notice }) => {
   const dispatch = useDispatch();
@@ -18,6 +19,8 @@ const NoticesItem = ({ notice }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalNoticeOpen, setIsModalNoticeOpen] = useState(false);
   const favorites = useSelector(selectFavorites);
+  const location = useLocation();
+  const isProfilePage = location.pathname === "/profile";
 
   const isFavorite = favorites.includes(notice._id);
 
@@ -64,13 +67,25 @@ const NoticesItem = ({ notice }) => {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-start gap-6 p-6 bg-white rounded-2xl md:w-85.5 xl:w-[363px]">
-        <div className="flex items-center justify-center w-[287px] h-44.5 bg-gray-200 rounded-2xl overflow-hidden md:w-73.5 xl:w-[315px]">
+      <div
+        className={
+          isProfilePage
+            ? "flex flex-col items-center justify-start gap-6 rounded-2xl bg-white p-6 md:w-85.5 md:gap-3.5 md:px-3.5 md:pt-3.5 md:pb-6 xl:w-80"
+            : "flex flex-col items-center justify-start gap-6 rounded-2xl bg-white p-6 md:w-85.5 xl:w-[363px]"
+        }
+      >
+        <div
+          className={
+            isProfilePage
+              ? "flex h-44.5 w-[287px] items-center justify-center overflow-hidden rounded-2xl bg-gray-200 md:h-40.5 md:w-78.5 xl:w-73"
+              : "flex h-44.5 w-[287px] items-center justify-center overflow-hidden rounded-2xl bg-gray-200 md:w-73.5 xl:w-[315px]"
+          }
+        >
           <img src={imgURL} alt={title || "Notice Image"} />
         </div>
         <div>
-          <div className="flex items-center justify-between mb-2">
-            <p className="text-base font-bold leading-5 text-[#2b2b2a] truncate capitalize md:text-lg md:leading-6">
+          <div className="mb-2 flex items-center justify-between">
+            <p className="truncate text-base leading-5 font-bold text-[#2b2b2a] capitalize md:text-lg md:leading-6">
               {title}
             </p>
             <div className="flex items-center gap-1">
@@ -80,7 +95,13 @@ const NoticesItem = ({ notice }) => {
               <p className="text-[#2b2b2a] md:leading-5">{popularity}</p>
             </div>
           </div>
-          <ul className="flex items-start gap-3.5 w-[287px] mb-4 mb:gap-4 md:w-73.5">
+          <ul
+            className={
+              isProfilePage
+                ? "mb-3.5 flex w-[287px] items-start gap-3.5 md:h-11 md:w-78.5 md:gap-4 xl:w-73"
+                : "mb-4 flex w-[287px] items-start gap-3.5 md:h-11 md:w-73.5 md:gap-4"
+            }
+          >
             <li className="flex flex-col gap-0.5">
               <p className="text-[10px] leading-3.5 tracking-[-0.02em] text-black/50">
                 Name
@@ -120,15 +141,25 @@ const NoticesItem = ({ notice }) => {
               </p>
             </li>
           </ul>
-          <p className="tracking-[-0.02em] text-[#2b2b2a] mb-4 md:h-9 md:mb-6">
+          <p
+            className={
+              isProfilePage
+                ? "mb-4 tracking-[-0.02em] text-[#2b2b2a] md:mb-4 md:h-9"
+                : "mb-4 tracking-[-0.02em] text-[#2b2b2a] md:mb-6 md:h-9"
+            }
+          >
             {comment}
           </p>
-          <p className="text-base font-bold leading-5 text-[#2b2b2a] mb-3 md:text-lg md:leading-6">
+          <p className="mb-3 text-base leading-5 font-bold text-[#2b2b2a] md:text-lg md:leading-6">
             {price ? `$${price}` : "Free"}
           </p>
           <div className="flex items-center justify-center gap-2.5">
             <button
-              className="w-[231px] h-11.5 bg-orange rounded-[30px] text-sm text-white font-medium leading-4.5 tracking-[-0.42px] border-0 outline-0 cursor-pointer md:w-59 md:h-12 md:text-base md:leading-5 md:tracking-[-0.03em] xl:w-[257px]"
+              className={
+                isProfilePage
+                  ? "bg-orange h-11.5 w-[231px] cursor-pointer rounded-[30px] border-0 text-sm leading-4.5 font-medium tracking-[-0.42px] text-white outline-0 md:h-11 md:w-65 md:text-base md:leading-5 md:tracking-[-0.03em] xl:w-59.5"
+                  : "bg-orange h-11.5 w-[231px] cursor-pointer rounded-[30px] border-0 text-sm leading-4.5 font-medium tracking-[-0.42px] text-white outline-0 md:h-12 md:w-59 md:text-base md:leading-5 md:tracking-[-0.03em] xl:w-[257px]"
+              }
               type="button"
               onClick={isLoggedIn ? openModalNotice : openModal}
             >
@@ -136,7 +167,11 @@ const NoticesItem = ({ notice }) => {
             </button>
             {isFavorite ? (
               <button
-                className="flex items-center justify-center w-11.5 h-11.5 bg-brown-light rounded-full border-0 outline-0 cursor-pointer md:w-12 md:h-12"
+                className={
+                  isProfilePage
+                    ? "bg-brown-light flex h-11.5 w-11.5 cursor-pointer items-center justify-center rounded-full border-0 outline-0 md:h-11 md:w-11"
+                    : "bg-brown-light flex h-11.5 w-11.5 cursor-pointer items-center justify-center rounded-full border-0 outline-0 md:h-12 md:w-12"
+                }
                 type="button"
                 onClick={handleRemoveFromFavorites}
               >
@@ -146,7 +181,11 @@ const NoticesItem = ({ notice }) => {
               </button>
             ) : (
               <button
-                className="flex items-center justify-center w-11.5 h-11.5 bg-brown-light rounded-full border-0 outline-0 cursor-pointer"
+                className={
+                  isProfilePage
+                    ? "bg-brown-light flex h-11.5 w-11.5 cursor-pointer items-center justify-center rounded-full border-0 outline-0 md:h-11 md:w-11"
+                    : "bg-brown-light flex h-11.5 w-11.5 cursor-pointer items-center justify-center rounded-full border-0 outline-0 md:h-12 md:w-12"
+                }
                 type="button"
                 onClick={handleAddToFavorites}
               >

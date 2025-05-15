@@ -12,26 +12,28 @@ const NewsItem = ({ item }) => {
 
   return (
     <div className="flex flex-col md:w-[340px] xl:w-[361px]">
-      <div className="flex items-center w-full h-[190px] bg-white rounded-[15px] mb-5 overflow-hidden md:mb-7 md:w-[340px] md:h-[226px] xl:w-[361px]">
+      <div className="mb-5 flex h-[190px] w-full items-center overflow-hidden rounded-[15px] bg-white md:mb-7 md:h-[226px] md:w-[340px] xl:w-[361px]">
         <img
           className="object-cover"
           src={imgUrl}
           alt={title || "News Image"}
         />
       </div>
-      <h3 className="text-base font-bold leading-5 tracking-[-0.48px] mb-3 md:h-13 md:mb-3.5 md:text-xl md:leading-6.5 md:tracking-[-0.03em] md:line-clamp-2">
+      <h3 className="mb-3 text-base leading-5 font-bold tracking-[-0.48px] md:mb-3.5 md:line-clamp-2 md:h-13 md:text-xl md:leading-6.5 md:tracking-[-0.03em]">
         {title}
       </h3>
-      <p className="max-h-19.5 mb-[19px] tracking-[-0.02em] line-clamp-4 md:h-19.5 md:mb-7 md:text-base md:leading-5 md:tracking-[-0.02em]">
+      <p className="mb-[19px] line-clamp-4 max-h-19.5 tracking-[-0.02em] md:mb-7 md:h-19.5 md:text-base md:leading-5 md:tracking-[-0.02em]">
         {text}
       </p>
       <div className="flex items-center justify-between md:mb-7">
-        <p className="text-black/50 tracking-[-0.28px] md:text-base md:leading-5 md:tracking-[-0.02em]">
+        <p className="tracking-[-0.28px] text-black/50 md:text-base md:leading-5 md:tracking-[-0.02em]">
           {formattedDateString}
         </p>
         <Link
-          className="text-sm text-orange font-medium leading-3.5 tracking-[-0.28px] underline decoration-solid decoration-auto underline-offset-auto border-0 outline-0 cursor-pointer md:text-base md:leading-5 md:tracking-[-0.02em]"
+          className="text-orange cursor-pointer border-0 text-sm leading-3.5 font-medium tracking-[-0.28px] underline decoration-solid decoration-auto underline-offset-auto outline-0 md:text-base md:leading-5 md:tracking-[-0.02em]"
           type="button"
+          target="_blank"
+          rel="noopener noreferrer nofollow"
           to={url}
         >
           Read more

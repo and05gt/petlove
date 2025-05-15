@@ -7,22 +7,20 @@ import ModalEditUser from "./ModalEditUser.jsx";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/users/selectors.js";
-import useResponsive from "../hooks/useResponsive.js";
+import { useModal } from "./ModalContext.jsx";
+import ModalApproveAction from "./ModalApproveAction.jsx";
 
 const UserCard = () => {
   const user = useSelector(selectUser);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isOpen, openModal, closeModal } = useModal();
   const { avatar } = user;
-  const windowWidth = useResponsive();
 
-  const styles = {
-    backgroundColor: "#fff4df",
-    color: "#f6b83d",
-    width: windowWidth < 768 ? "114px" : "136px",
-  };
+  const logOutBtnStyles =
+    "bg-brown-light text-orange w-28.5 hover:bg-brown-light-secondary cursor-pointer rounded-[30px] border-0 py-3 px-7 font-bold tracking-[-0.42px] uppercase outline-0 transition md:h-12.5 md:w-34 md:px-[35px] md:py-[15px] md:text-base md:leading-5 md:tracking-[-0.03em]";
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const openModalEdit = () => setIsModalOpen(true);
+  const closeModalEdit = () => setIsModalOpen(false);
 
   return (
     <div
@@ -38,13 +36,17 @@ const UserCard = () => {
           <use href={sprite + "#icon-user"}></use>
         </svg>
       </div>
-      <EditUserBtn openModalEdit={openModal} />
-      <UserBlock openModalEdit={openModal} />
+      <EditUserBtn openModalEdit={openModalEdit} />
+      <UserBlock openModalEdit={openModalEdit} />
       <PetsBlock />
-      <LogOutBtn styles={styles} />
+      <LogOutBtn
+        styles={logOutBtnStyles}
+        onClick={() => openModal(<ModalApproveAction />)}
+      />
       {isModalOpen && (
-        <ModalEditUser isOpen={isModalOpen} onClose={closeModal} />
+        <ModalEditUser isOpen={isModalOpen} onClose={closeModalEdit} />
       )}
+      {isOpen && <ModalApproveAction isOpen={isOpen} onClose={closeModal} />}
     </div>
   );
 };

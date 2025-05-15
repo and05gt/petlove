@@ -8,7 +8,7 @@ const AddPet = () => {
         My pets
       </h3>
       <Link
-        className="bg-orange flex h-9.5 w-[103px] cursor-pointer items-center justify-center gap-1 rounded-[30px] border-0 text-sm leading-4.5 font-medium tracking-[-0.42px] text-white outline-0 md:h-10 md:w-29.5 md:text-base md:leading-5 md:tracking-[-0.03em]"
+        className="bg-orange focus:bg-orange-secondary hover:bg-orange-secondary flex h-9.5 w-[103px] cursor-pointer items-center justify-center gap-1 rounded-[30px] border-0 text-sm leading-4.5 font-medium tracking-[-0.42px] text-white outline-0 transition md:h-10 md:w-29.5 md:text-base md:leading-5 md:tracking-[-0.03em]"
         to="/add-pet"
       >
         Add pet

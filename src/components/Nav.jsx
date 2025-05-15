@@ -8,13 +8,13 @@ const Nav = () => {
   const buildLinkClass = ({ isActive }) => {
     if (isHomePage) {
       return clsx(
-        "w-[119px] h-12 block p-[15px] border border-solid border-black/15 rounded-[30px] text-black text-center outline-none tracking-[-0.42px] md:w-30 md:h-12.5 md:text-base md:leading-5 md:tracking-[-0.03em] xl:w-auto xl:px-5 xl:py-[15px] xl:border-white/40 xl:text-white",
-        isActive && "border-orange"
+        "w-[119px] h-12 block p-[15px] border border-solid border-black/15 rounded-[30px] text-black text-center outline-0 tracking-[-0.42px] md:w-30 md:h-12.5 md:text-base md:leading-5 md:tracking-[-0.03em] xl:w-auto xl:px-5 xl:py-[15px] xl:border-white/40 xl:text-white",
+        isActive && "border-orange",
       );
     } else {
       return clsx(
-        "w-[119px] h-12 block p-[15px] border border-solid border-white/15 rounded-[30px] text-white text-center outline-none tracking-[-0.42px] md:w-30 md:h-12.5 md:text-base md:leading-5 md:tracking-[-0.03em] xl:w-auto xl:px-5 xl:py-[15px] xl:border-black/15 xl:text-black",
-        isActive && "border-white/50 xl:border-orange"
+        "w-[119px] h-12 block p-[15px] border border-solid border-white/15 rounded-[30px] text-white text-center outline-0 tracking-[-0.42px] md:w-30 md:h-12.5 md:text-base md:leading-5 md:tracking-[-0.03em] xl:w-auto xl:px-5 xl:py-[15px] xl:border-black/15 xl:text-black",
+        isActive && "border-white/50 xl:border-orange",
       );
     }
   };

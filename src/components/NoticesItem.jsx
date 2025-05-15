@@ -85,14 +85,14 @@ const NoticesItem = ({ notice }) => {
         </div>
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <p className="truncate text-base leading-5 font-bold text-[#2b2b2a] capitalize md:text-lg md:leading-6">
+            <p className="text-black-secondary truncate text-base leading-5 font-bold capitalize md:text-lg md:leading-6">
               {title}
             </p>
             <div className="flex items-center gap-1">
               <svg width={16} height={16} className="fill-orange">
                 <use href={sprite + "#icon-star"}></use>
               </svg>
-              <p className="text-[#2b2b2a] md:leading-5">{popularity}</p>
+              <p className="text-black-secondary md:leading-5">{popularity}</p>
             </div>
           </div>
           <ul
@@ -144,8 +144,8 @@ const NoticesItem = ({ notice }) => {
           <p
             className={
               isProfilePage
-                ? "mb-4 tracking-[-0.02em] text-[#2b2b2a] md:mb-4 md:h-9"
-                : "mb-4 tracking-[-0.02em] text-[#2b2b2a] md:mb-6 md:h-9"
+                ? "text-black-secondary mb-4 tracking-[-0.02em] md:mb-4 md:h-9"
+                : "text-black-secondary mb-4 tracking-[-0.02em] md:mb-6 md:h-9"
             }
           >
             {comment}
@@ -157,8 +157,8 @@ const NoticesItem = ({ notice }) => {
             <button
               className={
                 isProfilePage
-                  ? "bg-orange h-11.5 w-[231px] cursor-pointer rounded-[30px] border-0 text-sm leading-4.5 font-medium tracking-[-0.42px] text-white outline-0 md:h-11 md:w-65 md:text-base md:leading-5 md:tracking-[-0.03em] xl:w-59.5"
-                  : "bg-orange h-11.5 w-[231px] cursor-pointer rounded-[30px] border-0 text-sm leading-4.5 font-medium tracking-[-0.42px] text-white outline-0 md:h-12 md:w-59 md:text-base md:leading-5 md:tracking-[-0.03em] xl:w-[257px]"
+                  ? "bg-orange focus:bg-orange-secondary hover:bg-orange-secondary h-11.5 w-[231px] cursor-pointer rounded-[30px] border-0 text-sm leading-4.5 font-medium tracking-[-0.42px] text-white outline-0 transition md:h-11 md:w-65 md:text-base md:leading-5 md:tracking-[-0.03em] xl:w-59.5"
+                  : "bg-orange focus:bg-orange-secondary hover:bg-orange-secondary h-11.5 w-[231px] cursor-pointer rounded-[30px] border-0 text-sm leading-4.5 font-medium tracking-[-0.42px] text-white outline-0 transition md:h-12 md:w-59 md:text-base md:leading-5 md:tracking-[-0.03em] xl:w-[257px]"
               }
               type="button"
               onClick={isLoggedIn ? openModalNotice : openModal}
@@ -169,8 +169,8 @@ const NoticesItem = ({ notice }) => {
               <button
                 className={
                   isProfilePage
-                    ? "bg-brown-light flex h-11.5 w-11.5 cursor-pointer items-center justify-center rounded-full border-0 outline-0 md:h-11 md:w-11"
-                    : "bg-brown-light flex h-11.5 w-11.5 cursor-pointer items-center justify-center rounded-full border-0 outline-0 md:h-12 md:w-12"
+                    ? "bg-brown-light hover:bg-brown-light-secondary focus:bg-brown-light-secondary flex h-11.5 w-11.5 cursor-pointer items-center justify-center rounded-full border-0 outline-0 transition md:h-11 md:w-11"
+                    : "bg-brown-light hover:bg-brown-light-secondary focus:bg-brown-light-secondary flex h-11.5 w-11.5 cursor-pointer items-center justify-center rounded-full border-0 outline-0 transition md:h-12 md:w-12"
                 }
                 type="button"
                 onClick={handleRemoveFromFavorites}
@@ -183,8 +183,8 @@ const NoticesItem = ({ notice }) => {
               <button
                 className={
                   isProfilePage
-                    ? "bg-brown-light flex h-11.5 w-11.5 cursor-pointer items-center justify-center rounded-full border-0 outline-0 md:h-11 md:w-11"
-                    : "bg-brown-light flex h-11.5 w-11.5 cursor-pointer items-center justify-center rounded-full border-0 outline-0 md:h-12 md:w-12"
+                    ? "bg-brown-light hover:bg-brown-light-secondary focus:bg-brown-light-secondary flex h-11.5 w-11.5 cursor-pointer items-center justify-center rounded-full border-0 outline-0 transition md:h-11 md:w-11"
+                    : "bg-brown-light hover:bg-brown-light-secondary focus:bg-brown-light-secondary flex h-11.5 w-11.5 cursor-pointer items-center justify-center rounded-full border-0 outline-0 transition md:h-12 md:w-12"
                 }
                 type="button"
                 onClick={handleAddToFavorites}
@@ -206,6 +206,9 @@ const NoticesItem = ({ notice }) => {
           notice={notice}
           isOpen={isModalNoticeOpen}
           onClose={closeModalNotice}
+          isFavorite={isFavorite}
+          handleAddToFavorites={handleAddToFavorites}
+          handleRemoveFromFavorites={handleRemoveFromFavorites}
         />
       )}
     </>

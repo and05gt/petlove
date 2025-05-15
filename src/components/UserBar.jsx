@@ -13,7 +13,7 @@ const UserBar = () => {
   return (
     <div className="flex items-center gap-2">
       <Link
-        className="w-10 h-10 rounded-full bg-brown-light flex items-center justify-center md:w-12.5 md:h-12.5"
+        className="hover:bg-brown-light-secondary focus:bg-brown-light-secondary bg-brown-light flex h-10 w-10 items-center justify-center rounded-full outline-0 transition md:h-12.5 md:w-12.5"
         to="/profile"
       >
         <svg className="fill-orange" width={20} height={20}>
@@ -24,8 +24,8 @@ const UserBar = () => {
         <p
           className={
             isHomePage
-              ? "text-xl font-bold leading-5 tracking-[-0.03em] text-white"
-              : "text-xl font-bold leading-5 tracking-[-0.03em]"
+              ? "text-xl leading-5 font-bold tracking-[-0.03em] text-white"
+              : "text-xl leading-5 font-bold tracking-[-0.03em]"
           }
         >
           {user.name}

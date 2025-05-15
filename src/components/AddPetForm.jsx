@@ -10,6 +10,7 @@ import { addUserPet } from "../redux/users/operations.js";
 import clsx from "clsx";
 import { selectSpecies } from "../redux/notices/selectors.js";
 import toast from "react-hot-toast";
+import { selectError } from "../redux/users/selectors.js";
 
 const petSchema = yup.object().shape({
   title: yup.string().required("Title is required!"),
@@ -42,6 +43,7 @@ const petSchema = yup.object().shape({
 
 const AddPetForm = () => {
   const species = useSelector(selectSpecies);
+  const error = useSelector(selectError);
   const [selectedType, setSelectedType] = useState(null);
   const [urlInputValue, setUrlInputValue] = useState("");
   const [titleInputValue, setTitleInputValue] = useState("");
@@ -62,6 +64,10 @@ const AddPetForm = () => {
   });
 
   const onSubmit = (data) => {
+    if (error) {
+      toast.error(error);
+      return;
+    }
     dispatch(addUserPet(data));
     toast.success("Pet added successfully!");
     reset();
@@ -121,7 +127,7 @@ const AddPetForm = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="w-[295px] md:w-108">
         <div className="mb-2 flex justify-start gap-2 md:mb-[-22px] xl:mb-[-16px]">
           <label
-            className="bg-red-secondary/10 has-checked:bg-red-secondary flex h-8 w-8 cursor-pointer items-center justify-center rounded-full md:h-10 md:w-10"
+            className="bg-red-secondary/10 has-checked:bg-red-secondary flex h-8 w-8 cursor-pointer items-center justify-center rounded-full transition md:h-10 md:w-10"
             htmlFor="female"
           >
             <input
@@ -140,7 +146,7 @@ const AddPetForm = () => {
             </svg>
           </label>
           <label
-            className="bg-blue/10 has-checked:bg-blue flex h-8 w-8 cursor-pointer items-center justify-center rounded-full md:h-10 md:w-10"
+            className="bg-blue/10 has-checked:bg-blue flex h-8 w-8 cursor-pointer items-center justify-center rounded-full transition md:h-10 md:w-10"
             htmlFor="male"
           >
             <input
@@ -159,7 +165,7 @@ const AddPetForm = () => {
             </svg>
           </label>
           <label
-            className="bg-orange/10 has-checked:bg-orange flex h-8 w-8 cursor-pointer items-center justify-center rounded-full md:h-10 md:w-10"
+            className="bg-orange/10 has-checked:bg-orange flex h-8 w-8 cursor-pointer items-center justify-center rounded-full transition md:h-10 md:w-10"
             htmlFor="multiple"
           >
             <input
@@ -178,7 +184,7 @@ const AddPetForm = () => {
             </svg>
           </label>
         </div>
-        <div className="bg-brown-light mx-auto mt-0 mb-4 flex h-17 w-17 cursor-pointer items-center justify-center rounded-full md:mb-3 md:h-21.5 md:w-21.5">
+        <div className="bg-brown-light mx-auto mt-0 mb-4 flex h-17 w-17 items-center justify-center rounded-full md:mb-3 md:h-21.5 md:w-21.5">
           <svg width={34} height={34} className="fill-orange md:h-11 md:w-11">
             <use href={sprite + "#icon-footprint"}></use>
           </svg>
@@ -207,7 +213,7 @@ const AddPetForm = () => {
               )}
             </label>
             <button
-              className="bg-brown-light flex h-9 w-[117px] cursor-pointer items-center justify-center gap-[5px] rounded-[30px] border-0 p-2.5 text-xs leading-4 font-medium tracking-[-0.24px] text-black outline-0 md:h-10.5 md:w-36.5 md:gap-2 md:px-4 md:py-3 md:text-sm md:leading-4.5 md:tracking-[-0.02em]"
+              className="bg-brown-light focus:bg-brown-light-secondary hover:bg-brown-light-secondary flex h-9 w-[117px] cursor-pointer items-center justify-center gap-[5px] rounded-[30px] border-0 p-2.5 text-xs leading-4 font-medium tracking-[-0.24px] text-black outline-0 transition md:h-10.5 md:w-36.5 md:gap-2 md:px-4 md:py-3 md:text-sm md:leading-4.5 md:tracking-[-0.02em]"
               type="button"
             >
               Upload photo
@@ -328,13 +334,13 @@ const AddPetForm = () => {
         </div>
         <div className="flex items-center justify-end gap-2">
           <Link
-            className="block h-10.5 w-25 cursor-pointer rounded-[30px] border-0 bg-black/5 px-8.5 py-3 text-sm leading-4.5 font-bold tracking-[-0.42px] text-black outline-0 md:h-12 md:w-42.5 md:px-[67px] md:py-3.5 md:text-base md:leading-5"
+            className="block h-10.5 w-25 cursor-pointer rounded-[30px] border-0 bg-black/5 px-8.5 py-3 text-sm leading-4.5 font-bold tracking-[-0.42px] text-black outline-0 transition hover:bg-black/10 focus:bg-black/10 md:h-12 md:w-42.5 md:px-[67px] md:py-3.5 md:text-base md:leading-5"
             to="/profile"
           >
             Back
           </Link>
           <button
-            className="bg-orange block h-10.5 w-25 cursor-pointer rounded-[30px] border-0 px-6.5 py-3 text-sm leading-4.5 font-bold tracking-[-0.42px] text-white outline-0 md:h-12 md:w-42.5 md:px-14.5 md:py-3.5 md:text-base md:leading-5"
+            className="bg-orange focus:bg-orange-secondary hover:bg-orange-secondary block h-10.5 w-25 cursor-pointer rounded-[30px] border-0 px-6.5 py-3 text-sm leading-4.5 font-bold tracking-[-0.42px] text-white outline-0 transition md:h-12 md:w-42.5 md:px-14.5 md:py-3.5 md:text-base md:leading-5"
             type="submit"
           >
             Submit

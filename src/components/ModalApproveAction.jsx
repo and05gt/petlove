@@ -1,13 +1,15 @@
 import sprite from "../assets/sprite.svg";
 import catImg from "../assets/img/cat@1x.webp";
 import catImg2x from "../assets/img/cat@2x.webp";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../redux/users/operations.js";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { selectError } from "../redux/users/selectors.js";
 
 const ModalApproveAction = ({ isOpen, onClose, handleCloseModal }) => {
+  const error = useSelector(selectError);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,6 +22,10 @@ const ModalApproveAction = ({ isOpen, onClose, handleCloseModal }) => {
   }, [handleCloseModal]);
 
   const handleLogout = () => {
+    if (error) {
+      toast.error(error);
+      return;
+    }
     dispatch(logOut());
     toast.success("Sign out success");
     navigate("/home");
@@ -35,7 +41,7 @@ const ModalApproveAction = ({ isOpen, onClose, handleCloseModal }) => {
     >
       <div className="relative flex w-[335px] flex-col items-center rounded-[30px] bg-white px-7 py-10 md:w-112 md:p-20">
         <button
-          className="absolute top-5 right-5"
+          className="absolute top-5 right-5 cursor-pointer"
           type="button"
           onClick={onClose}
         >
@@ -57,14 +63,14 @@ const ModalApproveAction = ({ isOpen, onClose, handleCloseModal }) => {
         </h2>
         <div className="flex items-center justify-center gap-2">
           <button
-            className="bg-orange h-10.5 w-[137px] cursor-pointer rounded-[30px] border-0 text-sm leading-4.5 font-bold tracking-[-0.42px] text-white outline-0 md:h-12 md:w-35 md:text-base md:leading-5"
+            className="bg-orange focus:bg-orange-secondary hover:bg-orange-secondary h-10.5 w-[137px] cursor-pointer rounded-[30px] border-0 text-sm leading-4.5 font-bold tracking-[-0.42px] text-white outline-0 transition md:h-12 md:w-35 md:text-base md:leading-5"
             type="button"
             onClick={handleLogout}
           >
             Yes
           </button>
           <button
-            className="h-10.5 w-[134px] cursor-pointer rounded-[30px] border-0 bg-black/5 text-sm leading-4.5 font-bold tracking-[-0.42px] text-black outline-0 md:h-12 md:w-35 md:text-base md:leading-5"
+            className="h-10.5 w-[134px] cursor-pointer rounded-[30px] border-0 bg-black/5 text-sm leading-4.5 font-bold tracking-[-0.42px] text-black outline-0 transition hover:bg-black/10 focus:bg-black/10 md:h-12 md:w-35 md:text-base md:leading-5"
             type="button"
             onClick={onClose}
           >

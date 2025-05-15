@@ -3,7 +3,7 @@ import sprite from "../assets/sprite.svg";
 const EditUserBtn = ({ openModalEdit }) => {
   return (
     <button
-      className="absolute top-4.5 right-5 flex items-center justify-center w-9.5 h-9.5 bg-brown-light rounded-full border-0 outline-0 cursor-pointer md:top-10 md:right-10"
+      className="bg-brown-light hover:bg-brown-light-secondary focus:bg-brown-light-secondary absolute top-4.5 right-5 flex h-9.5 w-9.5 cursor-pointer items-center justify-center rounded-full border-0 outline-0 transition md:top-10 md:right-10"
       type="button"
       onClick={openModalEdit}
     >

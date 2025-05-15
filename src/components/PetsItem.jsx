@@ -64,7 +64,7 @@ const PetsItem = ({ pet }) => {
         </ul>
       </div>
       <button
-        className="bg-brown-light absolute top-3 right-3 flex h-7.5 w-7.5 items-center justify-center rounded-full md:h-8 md:w-8 xl:top-5 xl:right-5 xl:h-9.5 xl:w-9.5"
+        className="bg-brown-light hover:bg-brown-light-secondary focus:bg-brown-light-secondary absolute top-3 right-3 flex h-7.5 w-7.5 items-center justify-center rounded-full transition md:h-8 md:w-8 xl:top-5 xl:right-5 xl:h-9.5 xl:w-9.5"
         type="button"
         onClick={handleDeleteUserPet}
       >

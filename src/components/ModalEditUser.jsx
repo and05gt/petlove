@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../redux/users/selectors.js";
+import { selectError, selectUser } from "../redux/users/selectors.js";
 import { useEffect, useState } from "react";
 import { updateUser } from "../redux/users/operations.js";
 import toast from "react-hot-toast";
@@ -37,10 +37,11 @@ const userSchema = yup.object().shape({
 });
 
 const ModalEditUser = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
-
+  const error = useSelector(selectError);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
+
+  if (!isOpen) return null;
 
   if (!user) return;
   const { name, email, phone, avatar } = user;
@@ -74,6 +75,10 @@ const ModalEditUser = ({ isOpen, onClose }) => {
   };
 
   const onSubmit = (data) => {
+    if (error) {
+      toast.error(error);
+      return;
+    }
     dispatch(updateUser(data));
     toast.success("User information updated successfully!");
     onClose();
@@ -83,7 +88,7 @@ const ModalEditUser = ({ isOpen, onClose }) => {
     <div className="fixed top-0 left-0 flex h-full w-full items-center justify-center bg-black/30">
       <div className="relative flex w-[335px] flex-col rounded-[30px] bg-white px-5 py-10 md:w-120 md:p-12.5">
         <button
-          className="absolute top-5 right-5"
+          className="absolute top-5 right-5 cursor-pointer"
           type="button"
           onClick={onClose}
         >
@@ -108,7 +113,11 @@ const ModalEditUser = ({ isOpen, onClose }) => {
               <label htmlFor="avatar">
                 <input
                   {...register("avatar")}
-                  className="border-orange h-10.5 w-[161px] overflow-hidden rounded-[30px] border py-[13px] pr-[39px] pl-3 text-xs leading-4 font-medium tracking-[-0.24px] text-ellipsis whitespace-nowrap outline-0 md:w-56.5 md:py-3 md:pr-5"
+                  className={
+                    avatar
+                      ? "border-orange h-10.5 w-[161px] overflow-hidden rounded-[30px] border py-[13px] pr-[39px] pl-3 text-xs leading-4 font-medium tracking-[-0.24px] text-ellipsis whitespace-nowrap outline-0 md:w-56.5 md:py-3 md:pr-5"
+                      : "h-10.5 w-[161px] overflow-hidden rounded-[30px] border border-black/15 py-[13px] pr-[39px] pl-3 text-xs leading-4 font-medium tracking-[-0.24px] text-ellipsis whitespace-nowrap outline-0 md:w-56.5 md:py-3 md:pr-5"
+                  }
                   type="text"
                   id="avatar"
                   name="avatar"
@@ -123,7 +132,7 @@ const ModalEditUser = ({ isOpen, onClose }) => {
                 )}
               </label>
               <button
-                className="bg-brown-light flex h-10.5 w-31.5 cursor-pointer items-center justify-center gap-2 rounded-[30px] border-0 px-3 py-[13px] text-xs leading-4 font-medium tracking-[-0.24px] text-black outline-0 md:w-36.5 md:px-4 md:py-3 md:text-sm md:leading-4.5 md:tracking-[-0.02em]"
+                className="bg-brown-light focus:bg-brown-light-secondary hover:bg-brown-light-secondary flex h-10.5 w-31.5 cursor-pointer items-center justify-center gap-2 rounded-[30px] border-0 px-3 py-[13px] text-xs leading-4 font-medium tracking-[-0.24px] text-black outline-0 transition md:w-36.5 md:px-4 md:py-3 md:text-sm md:leading-4.5 md:tracking-[-0.02em]"
                 type="button"
               >
                 Upload photo
@@ -136,7 +145,11 @@ const ModalEditUser = ({ isOpen, onClose }) => {
               <label className="w-full" htmlFor="name">
                 <input
                   {...register("name")}
-                  className="border-orange h-10.5 w-full rounded-[30px] border p-3 text-sm leading-4.5 font-medium tracking-[-0.42px] outline-0 md:h-13 md:p-4 md:text-base md:leading-5 md:tracking-[-0.03em]"
+                  className={
+                    name
+                      ? "border-orange h-10.5 w-full rounded-[30px] border p-3 text-sm leading-4.5 font-medium tracking-[-0.42px] outline-0 md:h-13 md:p-4 md:text-base md:leading-5 md:tracking-[-0.03em]"
+                      : "h-10.5 w-full rounded-[30px] border border-black/15 p-3 text-sm leading-4.5 font-medium tracking-[-0.42px] outline-0 md:h-13 md:p-4 md:text-base md:leading-5 md:tracking-[-0.03em]"
+                  }
                   type="text"
                   id="name"
                   name="name"
@@ -153,7 +166,11 @@ const ModalEditUser = ({ isOpen, onClose }) => {
               <label className="w-full" htmlFor="email">
                 <input
                   {...register("email")}
-                  className="border-orange h-10.5 w-full rounded-[30px] border p-3 text-sm leading-4.5 font-medium tracking-[-0.42px] outline-0 md:h-13 md:p-4 md:text-base md:leading-5 md:tracking-[-0.03em]"
+                  className={
+                    email
+                      ? "border-orange h-10.5 w-full rounded-[30px] border p-3 text-sm leading-4.5 font-medium tracking-[-0.42px] outline-0 md:h-13 md:p-4 md:text-base md:leading-5 md:tracking-[-0.03em]"
+                      : "h-10.5 w-full rounded-[30px] border border-black/15 p-3 text-sm leading-4.5 font-medium tracking-[-0.42px] outline-0 md:h-13 md:p-4 md:text-base md:leading-5 md:tracking-[-0.03em]"
+                  }
                   type="text"
                   id="email"
                   name="email"
@@ -170,7 +187,11 @@ const ModalEditUser = ({ isOpen, onClose }) => {
               <label className="w-full" htmlFor="phone">
                 <input
                   {...register("phone")}
-                  className="border-orange h-10.5 w-full rounded-[30px] border p-3 text-sm leading-4.5 font-medium tracking-[-0.42px] outline-0 md:h-13 md:p-4 md:text-base md:leading-5 md:tracking-[-0.03em]"
+                  className={
+                    phone
+                      ? "border-orange h-10.5 w-full rounded-[30px] border p-3 text-sm leading-4.5 font-medium tracking-[-0.42px] outline-0 md:h-13 md:p-4 md:text-base md:leading-5 md:tracking-[-0.03em]"
+                      : "h-10.5 w-full rounded-[30px] border border-black/15 p-3 text-sm leading-4.5 font-medium tracking-[-0.42px] outline-0 md:h-13 md:p-4 md:text-base md:leading-5 md:tracking-[-0.03em]"
+                  }
                   type="text"
                   id="phone"
                   name="phone"
@@ -187,7 +208,7 @@ const ModalEditUser = ({ isOpen, onClose }) => {
             </div>
           </div>
           <button
-            className="bg-orange h-10.5 w-full cursor-pointer rounded-[30px] border-0 text-sm leading-4.5 font-bold tracking-[-0.42px] text-white outline-0 md:h-13 md:text-base md:leading-5 md:tracking-[-0.03em]"
+            className="bg-orange focus:bg-orange-secondary hover:bg-orange-secondary h-10.5 w-full cursor-pointer rounded-[30px] border-0 text-sm leading-4.5 font-bold tracking-[-0.42px] text-white outline-0 transition md:h-13 md:text-base md:leading-5 md:tracking-[-0.03em]"
             type="submit"
           >
             Go to profile

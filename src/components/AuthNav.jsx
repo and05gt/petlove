@@ -4,13 +4,13 @@ const AuthNav = () => {
   return (
     <div className="flex flex-col gap-2 md:flex-row">
       <Link
-        className="block w-44.5 h-10.5 p-3 rounded-[30px] cursor-pointer bg-orange text-white font-bold leading-4.5 tracking-[-0.42px] uppercase text-center md:w-auto md:h-12.5 md:px-[35px] md:py-[15px] md:text-base md:leading-5 md:tracking-[-0.48px]"
+        className="bg-orange focus:bg-orange-secondary hover:bg-orange-secondary block h-10.5 w-44.5 cursor-pointer rounded-[30px] p-3 text-center leading-4.5 font-bold tracking-[-0.42px] text-white uppercase transition md:h-12.5 md:w-auto md:px-[35px] md:py-[15px] md:text-base md:leading-5 md:tracking-[-0.48px]"
         to="/login"
       >
         Log In
       </Link>
       <Link
-        className="block w-44.5 h-10.5 p-3 rounded-[30px] cursor-pointer bg-brown-light text-orange font-bold leading-4.5 tracking-[-0.42px] uppercase text-center md:w-auto md:h-12.5 md:px-5 md:py-[15px] md:text-base md:leading-5 md:tracking-[-0.48px]"
+        className="bg-brown-light focus:bg-brown-light-secondary hover:bg-brown-light-secondary text-orange block h-10.5 w-44.5 cursor-pointer rounded-[30px] p-3 text-center leading-4.5 font-bold tracking-[-0.42px] uppercase transition md:h-12.5 md:w-auto md:px-5 md:py-[15px] md:text-base md:leading-5 md:tracking-[-0.48px]"
         to="/register"
       >
         Registration

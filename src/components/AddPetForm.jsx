@@ -41,6 +41,9 @@ const petSchema = yup.object().shape({
   sex: yup.string().required("Sex of pet is required!"),
 });
 
+const cloudName = "do0ywvaar";
+const uploadPreset = "avatar_upload";
+
 const AddPetForm = () => {
   const species = useSelector(selectSpecies);
   const error = useSelector(selectError);
@@ -62,6 +65,32 @@ const AddPetForm = () => {
     resolver: yupResolver(petSchema),
     mode: "onSubmit",
   });
+
+  const handleUploadPetAvatar = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", uploadPreset);
+
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
+      const data = await response.json();
+      const imageUrl = data.secure_url;
+      setUrlInputValue(imageUrl);
+      toast.success("File uploaded successfully!");
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      toast.error("Error uploading file");
+    }
+  };
 
   const onSubmit = (data) => {
     if (error) {
@@ -184,10 +213,14 @@ const AddPetForm = () => {
             </svg>
           </label>
         </div>
-        <div className="bg-brown-light mx-auto mt-0 mb-4 flex h-17 w-17 items-center justify-center rounded-full md:mb-3 md:h-21.5 md:w-21.5">
-          <svg width={34} height={34} className="fill-orange md:h-11 md:w-11">
-            <use href={sprite + "#icon-footprint"}></use>
-          </svg>
+        <div className="bg-brown-light mx-auto mt-0 mb-4 flex h-17 w-17 items-center justify-center overflow-hidden rounded-full md:mb-3 md:h-21.5 md:w-21.5">
+          {urlInputValue ? (
+            <img src={urlInputValue ? urlInputValue : null} alt="Pet Avatar" />
+          ) : (
+            <svg width={34} height={34} className="fill-orange md:h-11 md:w-11">
+              <use href={sprite + "#icon-footprint"}></use>
+            </svg>
+          )}
         </div>
 
         <div className="mb-[31px] flex flex-col gap-2.5 md:mb-11.5 md:gap-4.5 xl:mb-10">
@@ -212,10 +245,17 @@ const AddPetForm = () => {
                 </p>
               )}
             </label>
-            <button
+            <label
+              htmlFor="uploadBtn"
               className="bg-brown-light focus:bg-brown-light-secondary hover:bg-brown-light-secondary flex h-9 w-[117px] cursor-pointer items-center justify-center gap-[5px] rounded-[30px] border-0 p-2.5 text-xs leading-4 font-medium tracking-[-0.24px] text-black outline-0 transition md:h-10.5 md:w-36.5 md:gap-2 md:px-4 md:py-3 md:text-sm md:leading-4.5 md:tracking-[-0.02em]"
-              type="button"
             >
+              <input
+                className="hidden"
+                id="uploadBtn"
+                type="file"
+                accept="image/*"
+                onChange={handleUploadPetAvatar}
+              />
               Upload photo
               <svg
                 width={16}
@@ -224,7 +264,7 @@ const AddPetForm = () => {
               >
                 <use href={sprite + "#icon-upload-cloud"}></use>
               </svg>
-            </button>
+            </label>
           </div>
           <label htmlFor="title">
             <input

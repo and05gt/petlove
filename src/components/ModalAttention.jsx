@@ -10,7 +10,7 @@ const ModalAttention = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed top-0 left-0 flex h-full w-full items-center justify-center bg-black/30">
-      <div className="relative flex w-[335px] flex-col items-center rounded-[30px] bg-white px-7 py-10">
+      <div className="relative flex w-[335px] flex-col items-center rounded-[30px] bg-white px-7 py-10 md:w-116.5 md:p-15">
         <button
           className="absolute top-5 right-5 cursor-pointer"
           type="button"
@@ -20,19 +20,17 @@ const ModalAttention = ({ isOpen, onClose }) => {
             <use href={sprite + "#icon-close"}></use>
           </svg>
         </button>
-        <div className="bg-brown-light mb-5 flex h-20 w-20 items-center justify-center rounded-full">
+        <div className="bg-brown-light mb-5 flex h-20 w-20 items-center justify-center rounded-full p-4.5">
           <img
             src={dogImg}
-            alt="Cat Image"
+            alt="Dog Image"
             srcSet={`${dogImg} 1x, ${dogImg2x} 2x`}
-            width={44}
-            height={44}
           />
         </div>
-        <h2 className="text-orange mb-5 text-xl leading-5 font-bold tracking-[-0.6px]">
+        <h2 className="text-orange mb-5 text-xl leading-5 font-bold tracking-[-0.6px] md:text-2xl md:leading-7 md:tracking-[-0.03em]">
           Attention
         </h2>
-        <p className="mb-6 text-center">
+        <p className="text-black-secondary mb-6 text-center tracking-[-0.02em] md:mb-7">
           We would like to remind you that certain functionality is available
           only to authorized users.If you have an account, please log in with
           your credentials. If you do not already have an account, you must
@@ -40,14 +38,14 @@ const ModalAttention = ({ isOpen, onClose }) => {
         </p>
         <div className="flex items-center justify-center gap-2">
           <button
-            className="bg-orange focus:bg-orange-secondary hover:bg-orange-secondary h-10.5 w-[135px] cursor-pointer rounded-[30px] border-0 text-sm leading-4.5 font-bold tracking-[-0.42px] text-white outline-0 transition"
+            className="bg-orange focus:bg-orange-secondary hover:bg-orange-secondary h-10.5 w-[135px] cursor-pointer rounded-[30px] border-0 text-sm leading-4.5 font-bold tracking-[-0.42px] text-white outline-0 transition md:h-12 md:w-35 md:text-base md:leading-5 md:tracking-[-0.03em]"
             type="button"
             onClick={() => navigate("/login")}
           >
             Log In
           </button>
           <button
-            className="bg-brown-light hover:bg-brown-light-secondary focus:bg-brown-light-secondary text-orange h-10.5 w-[129px] cursor-pointer rounded-[30px] border-0 text-sm leading-4.5 font-bold tracking-[-0.42px] outline-0 transition"
+            className="bg-brown-light hover:bg-brown-light-secondary focus:bg-brown-light-secondary text-orange h-10.5 w-[129px] cursor-pointer rounded-[30px] border-0 text-sm leading-4.5 font-bold tracking-[-0.42px] outline-0 transition md:h-12 md:w-35 md:text-base md:leading-5 md:tracking-[-0.03em]"
             type="button"
             onClick={() => navigate("/register")}
           >

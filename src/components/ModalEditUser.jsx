@@ -36,6 +36,9 @@ const userSchema = yup.object().shape({
   }),
 });
 
+const cloudName = "do0ywvaar";
+const uploadPreset = "avatar_upload";
+
 const ModalEditUser = ({ isOpen, onClose }) => {
   const error = useSelector(selectError);
   const user = useSelector(selectUser);
@@ -74,12 +77,41 @@ const ModalEditUser = ({ isOpen, onClose }) => {
     }));
   };
 
-  const onSubmit = (data) => {
+  const handleUploadAvatar = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", uploadPreset);
+
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
+      const data = await response.json();
+      const imageUrl = data.secure_url;
+      setFormValues((prevValues) => ({
+        ...prevValues,
+        avatar: imageUrl,
+      }));
+      toast.success("File uploaded successfully!");
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      toast.error("Error uploading file");
+    }
+  };
+
+  const onSubmit = () => {
     if (error) {
       toast.error(error);
       return;
     }
-    dispatch(updateUser(data));
+    dispatch(updateUser(formValues));
     toast.success("User information updated successfully!");
     onClose();
   };
@@ -101,7 +133,7 @@ const ModalEditUser = ({ isOpen, onClose }) => {
         </h2>
         <div className="mb-3 flex items-center justify-center">
           <span className="bg-orange flex h-20 w-20 items-center justify-center overflow-hidden rounded-full md:h-21.5 md:w-21.5">
-            <img src={avatar} alt="Avatar" />
+            <img src={avatar ? avatar : null} alt="Avatar" />
           </span>
         </div>
         <form
@@ -131,15 +163,22 @@ const ModalEditUser = ({ isOpen, onClose }) => {
                   </p>
                 )}
               </label>
-              <button
+              <label
+                htmlFor="uploadBtn"
                 className="bg-brown-light focus:bg-brown-light-secondary hover:bg-brown-light-secondary flex h-10.5 w-31.5 cursor-pointer items-center justify-center gap-2 rounded-[30px] border-0 px-3 py-[13px] text-xs leading-4 font-medium tracking-[-0.24px] text-black outline-0 transition md:w-36.5 md:px-4 md:py-3 md:text-sm md:leading-4.5 md:tracking-[-0.02em]"
-                type="button"
               >
+                <input
+                  className="hidden"
+                  id="uploadBtn"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleUploadAvatar}
+                />
                 Upload photo
                 <svg width={18} height={18} className="fill-orange">
                   <use href={sprite + "#icon-upload-cloud"}></use>
                 </svg>
-              </button>
+              </label>
             </div>
             <div className="flex w-full flex-col items-center gap-2.5 md:gap-3.5">
               <label className="w-full" htmlFor="name">

@@ -165,7 +165,7 @@ const NoticesItem = ({ notice }) => {
             >
               Learn more
             </button>
-            {isFavorite ? (
+            {isFavorite && isLoggedIn ? (
               <button
                 className={
                   isProfilePage
@@ -173,7 +173,7 @@ const NoticesItem = ({ notice }) => {
                     : "bg-brown-light hover:bg-brown-light-secondary focus:bg-brown-light-secondary flex h-11.5 w-11.5 cursor-pointer items-center justify-center rounded-full border-0 outline-0 transition md:h-12 md:w-12"
                 }
                 type="button"
-                onClick={handleRemoveFromFavorites}
+                onClick={isLoggedIn ? handleRemoveFromFavorites : openModal}
               >
                 <svg width={18} height={18} className="fill-orange">
                   <use href={sprite + "#icon-trash"}></use>
@@ -187,7 +187,7 @@ const NoticesItem = ({ notice }) => {
                     : "bg-brown-light hover:bg-brown-light-secondary focus:bg-brown-light-secondary flex h-11.5 w-11.5 cursor-pointer items-center justify-center rounded-full border-0 outline-0 transition md:h-12 md:w-12"
                 }
                 type="button"
-                onClick={handleAddToFavorites}
+                onClick={isLoggedIn ? handleAddToFavorites : openModal}
               >
                 <svg width={18} height={18} className="fill-orange">
                   <use href={sprite + "#icon-heart"}></use>

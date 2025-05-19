@@ -1,15 +1,20 @@
 import { useLocation } from "react-router-dom";
 
 const Title = ({ children }) => {
-  const Location = useLocation();
-  const isNoticesPage = Location.pathname === "/notices";
+  const location = useLocation();
+  const isNoticesPage = location.pathname === "/notices";
+  const isLoginPage = location.pathname === "/login";
+
+  const defaultTitleStyles = isNoticesPage
+    ? "text-[28px] leading-7 font-bold md:text-[54px] md:leading-13.5 md:tracking-[-0.03em] lg:px-8"
+    : "text-[28px] leading-7 font-bold md:text-[54px] md:leading-13.5 md:tracking-[-0.03em]";
 
   return (
     <h2
       className={
-        isNoticesPage
-          ? "px-8 text-[28px] font-bold leading-7 md:text-[54px] md:leading-13.5 md:tracking-[-0.03em]"
-          : "text-[28px] font-bold leading-7 md:text-[54px] md:leading-13.5 md:tracking-[-0.03em]"
+        isLoginPage
+          ? "text-[28px] leading-7 font-bold md:text-[54px] md:leading-13.5 md:tracking-[-0.04em]"
+          : defaultTitleStyles
       }
     >
       {children}

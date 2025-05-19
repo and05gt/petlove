@@ -36,7 +36,7 @@ const NewsPage = () => {
 
   return (
     <section className="pt-8 pb-20 md:pt-[59px] xl:px-8 xl:pt-17.5">
-      <div className="flex flex-col gap-5 mb-6 md:flex-row md:justify-between md:items-center">
+      <div className="mb-6 flex flex-col gap-5 md:mb-11 md:flex-row md:items-center md:justify-between xl:mb-15">
         <Title>News</Title>
         <form onSubmit={handleSubmit}>
           <SearchField

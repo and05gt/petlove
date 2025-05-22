@@ -68,7 +68,7 @@ const ModalNotice = ({
         </button>
         <div className="relative mb-5 md:mb-4">
           <div className="bg-orange flex h-30 w-30 items-center justify-center overflow-hidden rounded-full md:h-37.5 md:w-37.5">
-            <img src={imgURL} alt="Notice Image" />
+            <img src={imgURL} alt={name || "Notice Image"} />
           </div>
           <span className="bg-brown-light text-orange absolute top-0 left-0 z-20 rounded-[30px] px-3.5 py-2 text-xs leading-4 tracking-[-0.24px] capitalize md:text-sm md:leading-4.5 md:tracking-[-0.02em]">
             {category}

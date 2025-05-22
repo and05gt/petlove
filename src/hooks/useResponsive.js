@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const usePesponsive = () => {
+const useResponsive = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -19,4 +19,4 @@ const usePesponsive = () => {
   return { windowWidth };
 };
 
-export default usePesponsive;
+export default useResponsive;

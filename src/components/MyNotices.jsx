@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import NoticesItem from "./NoticesItem.jsx";
 import {
   selectNoticesFavorites,
   selectNoticesViewed,

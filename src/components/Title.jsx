@@ -4,6 +4,7 @@ const Title = ({ children }) => {
   const location = useLocation();
   const isNoticesPage = location.pathname === "/notices";
   const isLoginPage = location.pathname === "/login";
+  const isRegistrationPage = location.pathname === "/register";
 
   const defaultTitleStyles = isNoticesPage
     ? "text-[28px] leading-7 font-bold md:text-[54px] md:leading-13.5 md:tracking-[-0.03em] lg:px-8"
@@ -12,7 +13,7 @@ const Title = ({ children }) => {
   return (
     <h2
       className={
-        isLoginPage
+        isLoginPage || isRegistrationPage
           ? "text-[28px] leading-7 font-bold md:text-[54px] md:leading-13.5 md:tracking-[-0.04em]"
           : defaultTitleStyles
       }

@@ -30,7 +30,7 @@ const NewsItem = ({ item }) => {
           {formattedDateString}
         </p>
         <Link
-          className="text-orange cursor-pointer border-0 text-sm leading-3.5 font-medium tracking-[-0.28px] underline decoration-solid decoration-auto underline-offset-auto outline-0 md:text-base md:leading-5 md:tracking-[-0.02em]"
+          className="text-orange hover:text-orange-secondary focus:text-orange-secondary cursor-pointer border-0 text-sm leading-3.5 font-medium tracking-[-0.28px] underline decoration-solid decoration-auto underline-offset-auto outline-0 transition md:text-base md:leading-5 md:tracking-[-0.02em]"
           type="button"
           target="_blank"
           rel="noopener noreferrer nofollow"

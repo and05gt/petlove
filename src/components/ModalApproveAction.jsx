@@ -3,7 +3,6 @@ import catImg from "../assets/img/cat@1x.webp";
 import catImg2x from "../assets/img/cat@2x.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../redux/users/operations.js";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { selectError } from "../redux/users/selectors.js";
@@ -22,12 +21,10 @@ const ModalApproveAction = ({ isOpen, onClose, handleCloseModal }) => {
   }, [handleCloseModal]);
 
   const handleLogout = () => {
+    dispatch(logOut());
     if (error) {
-      toast.error(error);
       return;
     }
-    dispatch(logOut());
-    toast.success("Sign out success");
     navigate("/home");
     onClose();
   };

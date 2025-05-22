@@ -11,14 +11,14 @@ import loginDeskImg2x from "../assets/img/login-desk@2x.webp";
 
 const LoginPage = () => {
   return (
-    <section className="flex flex-col gap-2.5 md:gap-4 md:pb-8 xl:flex-row xl:gap-8">
+    <section className="flex flex-col gap-2.5 pb-5 md:gap-4 md:pb-8 xl:flex-row xl:gap-8">
       <PetBlock
         mob={`${loginMobImg} 1x, ${loginMobImg2x} 2x`}
         tab={`${loginTabImg} 1x, ${loginTabImg2x} 2x`}
         desk={`${loginDeskImg} 1x, ${loginDeskImg2x} 2x`}
         src={loginDeskImg}
       />
-      <div className="rounded-[30px] bg-white pt-15 pr-5 pb-15 pl-5 md:rounded-[60px] md:px-35 md:py-[71px] xl:px-21 xl:py-29.5">
+      <div className="rounded-[30px] bg-white px-5 py-15 md:rounded-[60px] md:px-35 md:py-[71px] xl:px-21 xl:py-29.5">
         <div className="mb-6 flex flex-col gap-3 md:mb-8 md:gap-4 xl:w-106">
           <Title>Log In</Title>
           <p className="md:text-lg md:leading-5.5 md:tracking-[-0.02em]">

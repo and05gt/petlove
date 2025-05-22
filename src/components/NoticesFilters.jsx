@@ -111,6 +111,8 @@ const NoticesFilters = () => {
   };
 
   return (
+    // виправити стилі меню селектів, як на макеті
+
     <form className="bg-brown-light mb-10 w-[335px] rounded-[30px] p-5 md:w-176 md:px-8 md:py-10 xl:w-304 xl:p-10">
       <div className="mb-5 flex flex-col gap-3 border-b-[1px] border-black/10 pb-5 md:flex-row md:flex-wrap md:gap-4">
         <SearchField

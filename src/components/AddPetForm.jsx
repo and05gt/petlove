@@ -93,12 +93,10 @@ const AddPetForm = () => {
   };
 
   const onSubmit = (data) => {
+    dispatch(addUserPet(data));
     if (error) {
-      toast.error(error);
       return;
     }
-    dispatch(addUserPet(data));
-    toast.success("Pet added successfully!");
     reset();
     navigate("/profile");
   };

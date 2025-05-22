@@ -107,12 +107,10 @@ const ModalEditUser = ({ isOpen, onClose }) => {
   };
 
   const onSubmit = () => {
+    dispatch(updateUser(formValues));
     if (error) {
-      toast.error(error);
       return;
     }
-    dispatch(updateUser(formValues));
-    toast.success("User information updated successfully!");
     onClose();
   };
 

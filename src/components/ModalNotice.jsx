@@ -148,6 +148,10 @@ const ModalNotice = ({
           <button
             className="bg-brown-light hover:bg-brown-light-secondary focus:bg-brown-light-secondary text-orange h-11 w-33.5 cursor-pointer rounded-[30px] border-0 text-base leading-5 font-medium tracking-[-0.48px] outline-0 transition md:h-12 md:w-40"
             type="button"
+            onClick={() => {
+              onClose();
+              window.location.href = "mailto:test@gmail.com";
+            }}
           >
             Contact
           </button>

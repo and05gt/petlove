@@ -3,6 +3,7 @@ import {
   addNoticeFavorites,
   deleteNoticeFavorites,
   fetchNotices,
+  getNoticeById,
   getNoticeCategories,
   getNoticeGender,
   getNoticeSpecies,
@@ -17,6 +18,7 @@ const initialState = {
   isLoading: false,
   error: null,
   totalPages: 0,
+  notice: null,
 };
 
 const noticesSlice = createSlice({
@@ -27,6 +29,9 @@ const noticesSlice = createSlice({
       .addCase(fetchNotices.fulfilled, (state, action) => {
         state.notices = action.payload.results;
         state.totalPages = action.payload.totalPages;
+      })
+      .addCase(getNoticeById.fulfilled, (state, action) => {
+        state.notice = action.payload;
       })
       .addCase(getNoticeCategories.fulfilled, (state, action) => {
         state.categories = action.payload;
@@ -46,44 +51,47 @@ const noticesSlice = createSlice({
       .addMatcher(
         isAnyOf(
           fetchNotices.pending,
+          getNoticeById.pending,
           getNoticeCategories.pending,
           getNoticeGender.pending,
           getNoticeSpecies.pending,
           addNoticeFavorites.pending,
-          deleteNoticeFavorites.pending
+          deleteNoticeFavorites.pending,
         ),
         (state) => {
           state.isLoading = true;
           state.error = null;
-        }
+        },
       )
       .addMatcher(
         isAnyOf(
           fetchNotices.fulfilled,
+          getNoticeById.fulfilled,
           getNoticeCategories.fulfilled,
           getNoticeGender.fulfilled,
           getNoticeSpecies.fulfilled,
           addNoticeFavorites.fulfilled,
-          deleteNoticeFavorites.fulfilled
+          deleteNoticeFavorites.fulfilled,
         ),
         (state) => {
           state.isLoading = false;
           state.error = null;
-        }
+        },
       )
       .addMatcher(
         isAnyOf(
           fetchNotices.rejected,
+          getNoticeById.rejected,
           getNoticeCategories.rejected,
           getNoticeGender.rejected,
           getNoticeSpecies.rejected,
           addNoticeFavorites.rejected,
-          deleteNoticeFavorites.rejected
+          deleteNoticeFavorites.rejected,
         ),
         (state, action) => {
           state.isLoading = false;
           state.error = action.payload;
-        }
+        },
       );
   },
 });

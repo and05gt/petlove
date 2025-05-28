@@ -49,7 +49,7 @@ const BurgerMenu = () => {
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         <svg
-          className={isHomePage ? "fill-white md:w-9 md:h-9" : "md:w-9 md:h-9"}
+          className={isHomePage ? "fill-white md:h-9 md:w-9" : "md:h-9 md:w-9"}
           width={32}
           height={32}
         >
@@ -61,8 +61,8 @@ const BurgerMenu = () => {
         <div
           className={
             isHomePage
-              ? "absolute top-0 right-0 z-10 w-54.5 h-[100vh] bg-white flex flex-col items-center justify-between pt-59 pb-10"
-              : "absolute top-0 right-0 z-10 w-54.5 h-[100vh] bg-orange flex flex-col items-center justify-between pt-59 pb-10"
+              ? "absolute top-0 right-0 z-10 flex h-[100vh] w-54.5 flex-col items-center justify-between bg-white pt-59 pb-10"
+              : "bg-orange absolute top-0 right-0 z-10 flex h-[100vh] w-54.5 flex-col items-center justify-between pt-59 pb-10"
           }
           ref={menuRef}
           onClick={handleCloseMenu}

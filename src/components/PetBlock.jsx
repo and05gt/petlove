@@ -12,15 +12,7 @@ const PetBlock = ({ mob, tab, desk, src }) => {
   const { windowWidth } = useResponsive();
 
   return (
-// зробити фон, як на макеті
-
-    <div
-      className={
-        isLoginPage || isRegistrationPage
-          ? "bg-orange relative overflow-hidden rounded-[30px] md:rounded-[60px] md:pr-22.5 md:pl-62.5 xl:w-148 xl:px-10"
-          : "bg-orange overflow-hidden rounded-[30px] pr-4.5 pl-5 md:h-62 md:rounded-[60px] md:pr-[203px] md:pl-51 xl:h-163.5 xl:w-148 xl:pr-10 xl:pl-10"
-      }
-    >
+    <div className="relative overflow-hidden rounded-[30px] md:rounded-[60px]">
       <picture>
         <source media={"(max-width: 767px)"} srcSet={mob} />
         <source

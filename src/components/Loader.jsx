@@ -11,13 +11,17 @@ const Loader = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (progress < 100) {
-        setProgress(progress + 1);
-      }
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        return prev + 1;
+      });
     }, 30);
 
     return () => clearInterval(interval);
-  }, [progress]);
+  }, []);
 
   return (
     <div className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center">

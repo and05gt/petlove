@@ -5,8 +5,33 @@ import mainTabImg from "../assets/img/main-tab@1x.webp";
 import mainTabImg2x from "../assets/img/main-tab@2x.webp";
 import mainDeskImg from "../assets/img/main-desk@1x.webp";
 import mainDeskImg2x from "../assets/img/main-desk@2x.webp";
+import { useEffect, useState } from "react";
+import Loader from "./Loader.jsx";
 
-const MainScreen = () => {
+const MainScreen = ({ onFinish }) => {
+  const [showLogo, setShowLogo] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const logoTimer = setTimeout(() => {
+      setShowLogo(false);
+      setIsLoading(true);
+    }, 2000);
+
+    return () => clearTimeout(logoTimer);
+  }, []);
+
+  useEffect(() => {
+    if (isLoading) {
+      const loadingTimer = setTimeout(() => {
+        setIsLoading(false);
+        onFinish();
+      }, 3000);
+
+      return () => clearTimeout(loadingTimer);
+    }
+  }, [isLoading, onFinish]);
+
   return (
     <div className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center">
       <picture>
@@ -24,15 +49,19 @@ const MainScreen = () => {
         />
         <img src={mainDeskImg} alt="Main Image" />
       </picture>
-      <p className="absolute inline-flex items-center text-[50px] leading-12.5 font-bold tracking-[-0.04em] text-white">
-        petl
-        <span className="h-11 w-11">
-          <svg width={44} height={44} className="fill-orange">
-            <use href={sprite + "#icon-heart-circle"}></use>
-          </svg>
-        </span>
-        ve
-      </p>
+      {showLogo ? (
+        <p className="absolute inline-flex items-center text-[50px] leading-12.5 font-bold tracking-[-0.04em] text-white">
+          petl
+          <span className="h-11 w-11">
+            <svg width={44} height={44} className="fill-orange">
+              <use href={sprite + "#icon-heart-circle"}></use>
+            </svg>
+          </span>
+          ve
+        </p>
+      ) : isLoading ? (
+        <Loader />
+      ) : null}
     </div>
   );
 };

@@ -4,21 +4,32 @@ import catImg2x from "../assets/img/cat@2x.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../redux/users/operations.js";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { selectError } from "../redux/users/selectors.js";
 
-const ModalApproveAction = ({ isOpen, onClose, handleCloseModal }) => {
+const ModalApproveAction = ({ isOpen, onClose }) => {
   const error = useSelector(selectError);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const backdropRef = useRef(null);
+
+  const handleCloseModal = (e) => {
+    if (e.target === backdropRef.current) {
+      onClose();
+    }
+  };
 
   useEffect(() => {
-    document.addEventListener("keydown", handleCloseModal);
-
-    return () => {
-      document.removeEventListener("keydown", handleCloseModal);
+    const handleKeyDown = (e) => {
+      if (e.code === "Escape") {
+        onClose();
+      }
     };
-  }, [handleCloseModal]);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
 
   const handleLogout = () => {
     dispatch(logOut());
@@ -34,6 +45,7 @@ const ModalApproveAction = ({ isOpen, onClose, handleCloseModal }) => {
   return (
     <div
       className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-black/30"
+      ref={backdropRef}
       onClick={handleCloseModal}
     >
       <div className="relative flex w-[335px] flex-col items-center rounded-[30px] bg-white px-7 py-10 md:w-112 md:p-20">

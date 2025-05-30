@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { selectError, selectUser } from "../redux/users/selectors.js";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { updateUser } from "../redux/users/operations.js";
 import toast from "react-hot-toast";
 
@@ -43,6 +43,7 @@ const ModalEditUser = ({ isOpen, onClose }) => {
   const error = useSelector(selectError);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
+  const backdropRef = useRef(null);
 
   if (!isOpen) return null;
 
@@ -114,8 +115,30 @@ const ModalEditUser = ({ isOpen, onClose }) => {
     onClose();
   };
 
+  const handleCloseModal = (e) => {
+    if (e.target === backdropRef.current) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.code === "Escape") {
+        onClose();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
   return (
-    <div className="fixed top-0 left-0 flex h-full w-full items-center justify-center bg-black/30">
+    <div
+      className="fixed top-0 left-0 flex h-full w-full items-center justify-center bg-black/30"
+      ref={backdropRef}
+      onClick={handleCloseModal}
+    >
       <div className="relative flex w-[335px] flex-col rounded-[30px] bg-white px-5 py-10 md:w-120 md:p-12.5">
         <button
           className="absolute top-5 right-5 cursor-pointer"

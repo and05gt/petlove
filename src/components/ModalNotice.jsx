@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import sprite from "../assets/sprite.svg";
 
 const ModalNotice = ({
@@ -8,6 +9,26 @@ const ModalNotice = ({
   handleAddToFavorites,
   handleRemoveFromFavorites,
 }) => {
+  const backdropRef = useRef(null);
+
+  const handleCloseModal = (e) => {
+    if (e.target === backdropRef.current) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.code === "Escape") {
+        onClose();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
   if (!isOpen) return null;
 
   const {
@@ -55,7 +76,11 @@ const ModalNotice = ({
   };
 
   return (
-    <div className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-black/30">
+    <div
+      className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-black/30"
+      ref={backdropRef}
+      onClick={handleCloseModal}
+    >
       <div className="relative flex w-[335px] flex-col items-center rounded-[30px] bg-white px-7 py-10 md:w-[473px] md:pr-18 md:pl-[71px]">
         <button
           className="absolute top-5 right-5 cursor-pointer"

@@ -13,6 +13,18 @@
   --color-green: #08aa83;
   --color-blue: #54adff;
   --color-gray-light: #f4f4f4;
+
+  --animate-loader: loader-spin 2s linear infinite;
+
+  @keyframes loader-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 }
 
 html {

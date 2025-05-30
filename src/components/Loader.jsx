@@ -4,10 +4,14 @@ import mainTabImg from "../assets/img/main-tab@1x.webp";
 import mainTabImg2x from "../assets/img/main-tab@2x.webp";
 import mainDeskImg from "../assets/img/main-desk@1x.webp";
 import mainDeskImg2x from "../assets/img/main-desk@2x.webp";
+import loaderMob from "../assets/img/loader@mob.webp";
+import loaderTab from "../assets/img/loader@tab.webp";
 import { useEffect, useState } from "react";
+import useResponsive from "../hooks/useResponsive.js";
 
 const Loader = () => {
   const [progress, setProgress] = useState(0);
+  const windowWidth = useResponsive();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -24,7 +28,7 @@ const Loader = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center">
+    <div className="fixed top-0 left-0 z-40 flex h-full w-full items-center justify-center">
       <picture>
         <source
           media={"(max-width: 767px)"}
@@ -41,10 +45,13 @@ const Loader = () => {
         <img src={mainDeskImg} alt="Main Image" />
       </picture>
 
-      <div
-        style={{ transform: `rotate(${(progress / 100) * 360}deg)` }}
-        className="absolute h-72 w-72 rounded-[270px] border-2 border-white/30"
-      ></div>
+      <div className="absolute z-50 h-67.5 w-67.5 overflow-hidden rounded-full md:h-99 md:w-99">
+        <img
+          className="animate-loader"
+          src={windowWidth < 768 ? loaderMob : loaderTab}
+          alt="Loader"
+        />
+      </div>
       <p className="absolute text-[50px] leading-12.5 font-bold tracking-[-2px] text-white">
         {progress}%
       </p>

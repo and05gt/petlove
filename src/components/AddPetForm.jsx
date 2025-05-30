@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import sprite from "../assets/sprite.svg";
 import Select, { components } from "react-select";
 import { useState } from "react";
-import { useForm, Controller, set } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";

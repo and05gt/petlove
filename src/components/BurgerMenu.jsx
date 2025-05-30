@@ -1,4 +1,4 @@
-import { use, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import sprite from "../assets/sprite.svg";
 import Nav from "../components/Nav.jsx";
 import AuthNav from "./AuthNav.jsx";
@@ -23,7 +23,7 @@ const BurgerMenu = () => {
 
   const handleCloseMenu = (e) => {
     e.stopPropagation();
-    if (e.target !== e.currentTarget || e.code === "Escape") {
+    if (e.target !== e.currentTarget) {
       setIsMenuOpen(false);
     }
   };

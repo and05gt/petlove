@@ -17,15 +17,9 @@ export const ModalProvider = ({ children }) => {
     setIsOpen(false);
   };
 
-  const handleCloseModal = (e) => {
-    if ((e.code && e.code === "Escape") || e.target === e.currentTarget) {
-      setModalContent(null);
-    }
-  };
-
   return (
     <ModalContext.Provider
-      value={{ isOpen, modalContent, openModal, closeModal, handleCloseModal }}
+      value={{ isOpen, modalContent, openModal, closeModal }}
     >
       {children}
     </ModalContext.Provider>

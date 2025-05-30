@@ -2,14 +2,38 @@ import sprite from "../assets/sprite.svg";
 import dogImg from "../assets/img/dog@1x.webp";
 import dogImg2x from "../assets/img/dog@2x.webp";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 const ModalAttention = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
+  const backdropRef = useRef(null);
 
   if (!isOpen) return null;
 
+  const handleCloseModal = (e) => {
+    if (e.target === backdropRef.current) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.code === "Escape") {
+        onClose();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
   return (
-    <div className="fixed top-0 left-0 flex h-full w-full items-center justify-center bg-black/30">
+    <div
+      className="fixed top-0 left-0 flex h-full w-full items-center justify-center bg-black/30"
+      ref={backdropRef}
+      onClick={handleCloseModal}
+    >
       <div className="relative flex w-[335px] flex-col items-center rounded-[30px] bg-white px-7 py-10 md:w-116.5 md:p-15">
         <button
           className="absolute top-5 right-5 cursor-pointer"
